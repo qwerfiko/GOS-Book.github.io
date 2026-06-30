@@ -2,84 +2,219 @@
 
 \section{Экстремумы функций нескольких переменных}
 
-Пусть $f\colon D_f \to \bbR, \quad D_f \subset \bbR^n$
+Пусть $f\colon D_f \to \bbR, \quad D_f \subset \bbR^n$.
 
 \begin{defn}
-Точка $x_0 \in D_f$ будет называться точкой \textit{локального минимума (максимума)}, если 
+Точка $x_0 \in D_f$ называется точкой \textit{локального минимума (максимума)} функции $f$, если
 \begin{equation} \label{ch10eq1}
-\exists \delta > 0 \cquad \forall x \in D_f \cap O_\delta(x_0) \cquad f(x) \ge f(x_0)\quad \bigl(f(x) \le f(x_0)\bigr)
-\end{equation} 
-Точка $x_0$ будет называться точкой \textit{строгого минимума (максимума)} :
+\exists\, \delta > 0 \cquad \forall x \in D_f \cap O_\delta(x_0) \cquad f(x) \ge f(x_0)\quad \bigl(f(x) \le f(x_0)\bigr).
+\end{equation}
+Точка $x_0$ называется точкой \textit{строгого локального минимума (максимума)}, если
 \begin{equation}\label{ch10eq1'}
-\exists \delta > 0\cquad \forall x \in D_f \cap O_\delta(x_0) \cquad f(x) > f(x_0)\quad \bigl(f(x) < f(x_0)\bigr)
-\tag{\ref{ch10eq1}$'$} 
-\end{equation} 
+\exists\, \delta > 0 \cquad \forall x \in D_f \cap \overset{\circ}{O}_\delta(x_0) \cquad f(x) > f(x_0)\quad \bigl(f(x) < f(x_0)\bigr).
+\tag{\ref{ch10eq1}$'$}
+\end{equation}
 \end{defn}
 
 \begin{defn}
-Точка $x_0 \in D_f$ называется точкой локального экстремума, если она является либо точкой локального минимума, либо точкой локального максимума функции $f$.
+Точка $x_0 \in D_f$ называется \textit{точкой локального экстремума}, если она является либо точкой локального минимума, либо точкой локального максимума функции $f$.
 
-Точка $x_0$ не является точкой локального экстремума, если
-$$\forall \delta > 0 \quad \exists x_1, x_2 \in D_f \cap \overset{\circ}{O}_\delta(x_0) \cquad f(x_1) < f(x_0) < f(x_2)$$
-\end{defn}
-\section{Необходимые условия, достаточные условия}
-
-\begin{thm}[Необходимое условие экстремума] \label{ch10thm1}
-Пусть функция~$f$ дифференцируема в точке $x_0 \in \bbR^n$. Тогда если $x_0$ является точкой локального экстремума функции $f$, то $\frac{\partial f}{\partial x_j}(x_0) = 0 \quad \forall j \in \overline{1,n}$, т.е.~$\grad f(x_0) = \vv{\theta}.$
-\end{thm}
-
-\begin{defn}
-Точка $x_0 \in D_f$ называется стационарной точкой функции $f$, если функция $f$ дифференцируема в точке $x_0$ и $\grad f(x_0) = \vv{\theta}$.
+Точка $x_0$ \textit{не является} точкой локального экстремума, если
+$$\forall\, \delta > 0 \quad \exists\, x_1, x_2 \in D_f \cap \overset{\circ}{O}_\delta(x_0) \cquad f(x_1) < f(x_0) < f(x_2).$$
 \end{defn}
 
-Пусть функция~$f$ в некоторой окрестности точки~$x_0\in \bbR^n$ имеет частные производные 2-ого порядка, непрерывные в точке $x_0$. Тогда существуют следующие формы для $\forall h\in \bbR^n$, которые мы  обозначим за \textit{линейную} и \textit{квадратичную} соответственно.
-\begin{gather}
-df (x_0) = (\nabla f, h) = \sum_{j =1}^{n} \pd{f}{x_j}h_j = \Phi_1(x_0,h)   \\
-d^2 f(x_0) = \sum_{i,j=1}^{n} \frac{\partial^2 f}{\partial x_i \partial x_j} (x_0) h_i h_j = \Phi_2 (x_0,h)
-\end{gather}
- 
-\begin{thm}[Необходимое условие экстремума]
-Пусть функция $f$ определена и имеет частные производные 2-го порядка в некоторой окрестности точки $x_0 \in \bbR^n$, причем частные производные 2-го порядка непрерывны в точке $x_0$.
+\begin{defn} \label{ch10:def:stationary}
+Точка $x_0 \in D_f$ называется \textit{стационарной точкой} функции $f$, если функция $f$ дифференцируема в точке $x_0$ и $\grad f(x_0) = \vv{\theta}$.
+\end{defn}
 
-Тогда, если $x_0$ "--- точка локального максимума функции $f$, то $\nabla f(x_0) = \overset{\rightarrow}{\theta}; \quad \Phi_2(x_0, h) \le 0 \quad \forall h \in \bbR^n.$
+\begin{notion}
+Условие стационарности для дифференцируемой функции равносильно одновременному выполнению условий
+$$
+\frac{\partial f}{\partial x_1}(x_0) = 0, \quad \ldots, \quad \frac{\partial f}{\partial x_n}(x_0) = 0.
+$$
+Это система $n$ уравнений с $n$ неизвестными для нахождения координат точки $x_0$.
+\end{notion}
+
+\section{Необходимые условия локального экстремума}
+
+\begin{thm}[Необходимое условие экстремума, первый порядок] \label{ch10thm1}
+Пусть функция $f$ дифференцируема в точке $x_0 \in \bbR^n$. Тогда если $x_0$ является точкой локального экстремума функции $f$, то
+$$\frac{\partial f}{\partial x_j}(x_0) = 0 \quad \forall\, j \in \overline{1,n},$$
+т.е. $\grad f(x_0) = \vv{\theta}$, и $x_0$ "--- стационарная точка.
 \end{thm}
 
 \begin{proof}
-$\nabla f(x_0) = \overset{\rightarrow}{\theta}$ согласно Теореме $\ref{ch10thm1}$. По формуле Тейлора с остаточным членом в форме Пеано (т.к.~$df(x_0) = 0$)
+Зафиксируем $i \in \overline{1,n}$. Если $x_0 = (x_1^0, \ldots, x_n^0)$ "--- точка локального экстремума функции $f(x_1, \ldots, x_n)$, то $x_i^0$ "--- точка локального экстремума того же характера для функции одной переменной
+$$\varphi(x_i) = f(x_1^0, \ldots, x_{i-1}^0, x_i, x_{i+1}^0, \ldots, x_n^0),$$
+где все переменные, кроме $x_i$, зафиксированы. По теореме Ферма $\varphi'(x_i^0) = 0$, т.е.
+$$\frac{\partial f}{\partial x_i}(x_1^0, \ldots, x_i^0, \ldots, x_n^0) = 0.$$
+Это верно для всех $i = 1, \ldots, n$, поэтому $x_0$ "--- стационарная точка.
+\end{proof}
+
+\begin{notion}
+Условие стационарности не является достаточным условием точки локального экстремума. Например, для функции $f(x, y) = x^2 - y^2$ (график "--- гиперболический параболоид) точка $(0, 0)$ является стационарной ($f'_x = f'_y = 0$), но не является точкой локального экстремума: в ней график имеет вид седла.
+\end{notion}
+
+Пусть функция $f$ в некоторой окрестности точки $x_0 \in \bbR^n$ имеет частные производные второго порядка, непрерывные в точке $x_0$. Тогда для $\forall\, h \in \bbR^n$ определены \textit{линейная} и \textit{квадратичная} формы:
+\begin{gather}
+df(x_0) = (\nabla f, h) = \sum_{j=1}^{n} \pd{f}{x_j}(x_0)\, h_j = \Phi_1(x_0, h), \label{ch10:linear}\\
+d^2f(x_0) = \sum_{i,j=1}^{n} \frac{\partial^2 f}{\partial x_i \partial x_j}(x_0)\, h_i\, h_j = \Phi_2(x_0, h). \label{ch10:quadratic}
+\end{gather}
+Напомним, что для дважды непрерывно дифференцируемой функции $\dfrac{\partial^2 f}{\partial x_i \partial x_j} = \dfrac{\partial^2 f}{\partial x_j \partial x_i}$, поэтому матрица квадратичной формы симметрична.
+
+\begin{thm}[Необходимое условие экстремума, второй порядок] \label{ch10thm2}
+Пусть функция $f$ определена и имеет частные производные второго порядка в некоторой окрестности точки $x_0 \in \bbR^n$, причём частные производные второго порядка непрерывны в точке $x_0$.
+
+Тогда если $x_0$ "--- точка локального максимума функции $f$, то $\nabla f(x_0) = \vv{\theta}$ и $\Phi_2(x_0, h) \le 0 \quad \forall\, h \in \bbR^n$.
+\end{thm}
+
+\begin{proof}
+Равенство $\nabla f(x_0) = \vv{\theta}$ следует из теоремы~\ref{ch10thm1}. По формуле Тейлора с остаточным членом в форме Пеано (с учётом $df(x_0) = 0$):
 \begin{equation} \label{ch10eq3}
-f(x) = f(x_0) + \frac{1}{2} \Phi_2(x_0, h) + \alpha(x)|h|^2, \quad \text{где} \quad h = x - x_0 \in \bbR \quad \text{при} \quad \alpha(x) \overset{x \to x_0}{\longrightarrow} 0.
+f(x) = f(x_0) + \frac{1}{2}\, \Phi_2(x_0, h) + \alpha(x)\,|h|^2, \quad h = x - x_0, \quad \alpha(x) \xrightarrow{x \to x_0} 0.
 \end{equation}
 
-$\forall x \in D_f \setminus \{x_0\}$ положим $\xi = \frac{x - x_0}{|x - x_0|}; \quad \rho = |x - x_0| \quad \Rightarrow \quad \rho > 0, \quad |\xi| = 1$.
+Для $x \in D_f \setminus \{x_0\}$ положим $\xi = \dfrac{x - x_0}{|x - x_0|}$, $\rho = |x - x_0|$, так что $\rho > 0$ и $|\xi| = 1$. Тогда $h = \rho\, \xi$ и, в силу однородности квадратичной формы,
+$$
+\Phi_2(x_0, h) = \Phi_2(x_0, \rho\, \xi) = \rho^2\, \Phi_2(x_0, \xi),
+$$
+откуда
+$$
+\frac{f(x) - f(x_0)}{\rho^2} = \frac{1}{2}\, \Phi_2(x_0, \xi) + \alpha(x).
+$$
 
-$h = x - x_0 = \rho \xi \quad \Rightarrow \quad \Phi_{2}(x_0, h) = \Phi_2(x_0, \rho \xi) = \rho^2 \Phi_2(x_0, \xi)$, т.к. $\Phi_2$ "--- квадратичная форма $\Rightarrow \frac{f(x) - f(x_0)}{\rho^2} = \frac{1}{2}\Phi_2(x_0, \xi) + \alpha(x)$
+Так как $x_0$ "--- точка локального максимума, то $\exists\, \delta_0 > 0$ такое, что $\forall\, x \in O_{\delta_0}(x_0) \cap D_f$ выполняется $f(x) - f(x_0) \le 0$. Следовательно, для любого $\xi \in S_1(\bbR^n)$ (единичная сфера):
+$$
+\Phi_2(x_0, \xi) = \lim_{\rho \to 0} \left( 2\, \frac{f(x) - f(x_0)}{\rho^2} - 2\,\alpha(x) \right).
+$$
 
-Т.к. $x_0$ "--- точка локального максимума, то $\exists \delta_0\cquad \forall x \in O_\delta(x_0) \cap D_f$. $f(x) - f(x_0) \le 0 \quad \Rightarrow \quad \forall \xi \in S_1(\bbR^n), (|\xi| = 1): \Phi_2(x_0, \xi) = 2 \frac{1}{\rho^2}(f(x) - f(x_0)) - \alpha(x)$
+Так как $\alpha(x) \to 0$ при $\rho \to 0$, а величина $\Phi_2(x_0, \xi)$ от $\rho$ не зависит, существует предел правой части, и $\dfrac{f(x) - f(x_0)}{\rho^2} \le 0$, поэтому
+$$
+\Phi_2(x_0, \xi) \le 0 \quad \forall\, \xi \in S_1(\bbR^n).
+$$
 
-$\Phi_2(x_0, \xi) = \lim\limits_{\rho \to 0} \left(2 \frac{1}{\rho^2}(f(x) - f(x_0)) - \alpha(x) \right)$
-
-$\exists \lim\limits_{\rho \to 0} \alpha(x) = 0$, $\Phi_2(x_0, \xi)$ от $\rho$ не зависит, правая часть имеет предел $\Longrightarrow \quad \exists \lim\limits_{\rho \to 0} \left( \frac{1}{\rho^2}(f(x) - f(x_0) \right) \le 0$
-
-$\Rightarrow \quad \forall \xi \in S_1(\bbR^n): \Phi_2(x_0, \xi) \le 0$
-
-$\Rightarrow \quad \forall h \in \bbR^n: \quad \Phi_2(x_0, h) = |h^2| \cdot \Phi_2\left( x_0, \frac{h}{|h|} \right) \le 0$ 
+Для произвольного $h \neq \vv{\theta}$:
+$$
+\Phi_2(x_0, h) = |h|^2 \cdot \Phi_2\!\left(x_0, \frac{h}{|h|}\right) \le 0.
+$$
+При $h = \vv{\theta}$ неравенство $\Phi_2(x_0, h) = 0 \le 0$ очевидно.
 \end{proof}
 
-\begin{thm} [Достаточное условие экстремума] \label{ch10thm3}
-Пусть функция $f$ определена и 2-ды непрерывно-дифференцируема в некоторой окрестности точки $x_0 \in \bbR^n$. Тогда если $\nabla f(x_0) = \vv{\theta}$ и $\Phi_2(x_0, h) > 0 \quad \forall h \not= \vv{\theta}$ , то $x_0$ "--- точка строгого локального минимума функции $f$.
+\section{Квадратичные формы и их знакоопределённость}
+
+Напомним, что \textit{квадратичной формой} от вектора $x = (x_1, \ldots, x_n)^T$ называется числовая функция
+$$
+K(x) = \sum_{i=1}^{n} b_{ii}\, x_i^2 + 2 \sum_{\substack{i,j=1 \\ i < j}}^{n} b_{ij}\, x_i\, x_j,
+$$
+где $(b_{ij})_{i,j=1}^n$ "--- симметричная матрица ($b_{ij} = b_{ji}$). При $\alpha \in \bbR$ выполняется $K(\alpha x) = \alpha^2 K(x)$.
+
+\begin{defn} \label{ch10:def:signforms}
+Квадратичная форма $K(x)$ называется:
+\begin{enumerate}
+    \item \textit{положительно определённой}, если $\forall\, x \neq \vv{\theta} \;\Rightarrow\; K(x) > 0$;
+    \item \textit{отрицательно определённой}, если $\forall\, x \neq \vv{\theta} \;\Rightarrow\; K(x) < 0$;
+    \item \textit{неопределённой}, если $\exists\, x', x'' \colon K(x') > 0,\; K(x'') < 0$;
+    \item \textit{положительно полуопределённой}, если $\forall\, x \;\Rightarrow\; K(x) \ge 0$, но $\exists\, x \neq \vv{\theta} \colon K(x) = 0$;
+    \item \textit{отрицательно полуопределённой}, если $\forall\, x \;\Rightarrow\; K(x) \le 0$, но $\exists\, x \neq \vv{\theta} \colon K(x) = 0$.
+\end{enumerate}
+\end{defn}
+
+\begin{notion}
+Тождественно нулевая квадратичная форма является одновременно положительно и отрицательно полуопределённой. Каждая из остальных квадратичных форм принадлежит ровно одному из пяти указанных классов.
+\end{notion}
+
+\begin{lemm} \label{ch10:lemma:Kbound}
+Если квадратичная форма $K(x)$ положительно определена, то
+$$\exists\, C > 0 \cquad \forall\, x \;\Longrightarrow\; K(x) \ge C\,|x|^2,$$
+где $|x| = \sqrt{x_1^2 + \ldots + x_n^2}$.
+
+Если квадратичная форма $K(x)$ отрицательно определена, то
+$$\exists\, C > 0 \cquad \forall\, x \;\Longrightarrow\; K(x) \le -C\,|x|^2.$$
+\end{lemm}
+
+\begin{proof}
+Достаточно провести доказательство для положительно определённой формы (затем заменить $K$ на $-K$).
+
+Рассмотрим $K$ на единичной сфере $S = \{x \in \bbR^n \colon |x| = 1\}$. Множество $S$ является компактом (замкнуто и ограничено), функция $K$ непрерывна на $S$, поэтому $K$ достигает на $S$ своей точной нижней грани $C$. Так как $K(x) > 0$ на $S$, то $C > 0$.
+
+Пусть $x \neq \vv{\theta}$ "--- произвольная точка из $\bbR^n$. Тогда $z = \dfrac{x}{|x|} \in S$, поэтому $K(z) \ge C$. Но $x = |x|\, z$, откуда
+$$
+K(x) = |x|^2\, K(z) \ge C\,|x|^2.
+$$
+При $x = \vv{\theta}$ неравенство $K(\vv{\theta}) = 0 \ge 0 = C \cdot 0$ очевидно.
+\end{proof}
+
+\section{Достаточные условия локального экстремума}
+
+В случае функции одной переменной имеют место достаточные условия локального экстремума двух типов:
+\begin{enumerate}
+    \item по смене знака $y'$ при прохождении точки;
+    \item по знаку $y''$ или производных высших порядков в стационарной точке.
+\end{enumerate}
+
+Достаточные условия первого типа в многомерном случае сформулировать затруднительно, так как <<пройти>> точку можно бесконечным числом способов "--- по разным направлениям. А вот достаточные условия второго типа переносятся: роль знака $y''$ играет знакоопределённость квадратичной формы второго дифференциала в стационарной точке.
+
+\begin{thm}[Достаточное условие экстремума] \label{ch10thm3}
+Пусть функция $f$ дважды непрерывно дифференцируема в некоторой окрестности стационарной точки $x_0 \in \bbR^n$ (т.е. $\nabla f(x_0) = \vv{\theta}$). Тогда:
+\begin{enumerate}
+    \item если $\Phi_2(x_0, h) > 0 \quad \forall\, h \neq \vv{\theta}$ (положительная определённость), то $x_0$ "--- точка строгого локального минимума;
+    \item если $\Phi_2(x_0, h) < 0 \quad \forall\, h \neq \vv{\theta}$ (отрицательная определённость), то $x_0$ "--- точка строгого локального максимума;
+    \item если $\Phi_2(x_0, h)$ "--- неопределённая квадратичная форма, то $x_0$ не является точкой локального экстремума.
+\end{enumerate}
 \end{thm}
 
 \begin{proof}
-Т.к. $\Phi_2$ непрерывна на компакте $S_1(\bbR^n)$, то она достигает минимума в точке $\xi_0 \in S_1(\bbR^n):  m = \Phi_2(x_0, \xi_0) = \inf\limits_{|\xi| = 1} \Phi_2(x_0, \xi) > 0$
-
-Справедлива формула $\eqref{ch10eq3} \quad \Rightarrow$
+\textbf{1)} Так как $x_0$ "--- стационарная точка, по формуле Тейлора~\eqref{ch10eq3}:
 $$
-f(x) - f(x_0) = \frac{1}{2}|h^2| \cdot \left( \Phi_2 \left( x_0, \frac{\overline{h}}{|h|} \right) + \alpha(x) \right) \ge \frac{1}{2} |h|^2(m + \alpha(x))
+\Delta f(x_0) = f(x) - f(x_0) = \frac{1}{2}\, \Phi_2(x_0, h) + \alpha(x)\,|h|^2, \quad h = x - x_0,
+$$
+где $\alpha(x) \to 0$ при $x \to x_0$.
+
+Так как $\Phi_2(x_0, \cdot)$ непрерывна на компакте $S_1(\bbR^n) = \{\xi \in \bbR^n \colon |\xi| = 1\}$, она достигает своего минимума:
+$$
+m = \inf_{|\xi| = 1} \Phi_2(x_0, \xi) = \Phi_2(x_0, \xi_0) > 0
+$$
+для некоторого $\xi_0 \in S_1(\bbR^n)$. По лемме~\ref{ch10:lemma:Kbound} имеем $\Phi_2(x_0, h) \ge m\,|h|^2$. Следовательно,
+$$
+\Delta f(x_0) \ge \frac{1}{2}\,|h|^2\!\left(m + 2\,\alpha(x)\right).
 $$
 
-\begin{multline*}
-\alpha(x) \overset{x \to x_0}{\Longrightarrow} 0 \\ \Rightarrow\\ \Rightarrow  \; \exists \delta > 0: \forall x \in \overset{\circ}{O}_\delta(x_0) \cap D_f: f(x) - f(x_0) \ge \frac{1}{2}|h|^2 \left( m - \frac{m}{2} \right) = \frac{m}{4}|h|^2 > 0 \\ \quad \Rightarrow \quad \text{Получили теорему } \ref{ch10thm3}
-\end{multline*}
+Так как $\alpha(x) \to 0$ при $x \to x_0$, то
+$$
+\exists\, \delta > 0 \cquad \forall\, x \in \overset{\circ}{O}_\delta(x_0) \cap D_f \cquad |\alpha(x)| < \frac{m}{4},
+$$
+откуда $m + 2\,\alpha(x) > m - \dfrac{m}{2} = \dfrac{m}{2} > 0$ и
+$$
+\Delta f(x_0) \ge \frac{m}{4}\,|h|^2 > 0 \quad \forall\, x \in \overset{\circ}{O}_\delta(x_0).
+$$
+Значит, $f(x) > f(x_0)$ в проколотой окрестности, и $x_0$ "--- точка строгого локального минимума.
 
-Теорема доказана.
+\medskip
+
+\textbf{2)} Доказывается аналогично: заменяем $f$ на $-f$ и применяем пункт~1).
+
+\medskip
+
+\textbf{3)} Пусть $\Phi_2(x_0, h)$ "--- неопределённая квадратичная форма. Тогда существует вектор $\vec{z} \neq \vv{\theta}$ такой, что $K(\vec{z}) = \Phi_2(x_0, \vec{z}) > 0$. Рассмотрим приращения вида $h = \lambda\, \vec{z}$, $\lambda > 0$. Тогда
+$$
+\Phi_2(x_0, \lambda\, \vec{z}) = \lambda^2\, \Phi_2(x_0, \vec{z}) = \lambda^2\, \beta\, |\vec{z}|^2,
+$$
+где $\beta = \dfrac{\Phi_2(x_0, \vec{z})}{|\vec{z}|^2} > 0$ "--- фиксированное число. В точке $x = x_0 + \lambda\, \vec{z}$:
+\begin{align*}
+\Delta f(x_0) &= \frac{1}{2}\, \lambda^2\, \beta\, |\vec{z}|^2 + \alpha(x)\, \lambda^2\, |\vec{z}|^2 = \lambda^2\, |\vec{z}|^2 \left(\frac{\beta}{2} + \alpha(x)\right).
+\end{align*}
+
+Так как $\alpha(x) \to 0$ при $\lambda \to 0$, то
+$$
+\exists\, \delta > 0 \cquad \forall\, \lambda \in \left(0, \frac{\delta}{|\vec{z}|}\right) \cquad \frac{\beta}{2} + \alpha(x) > 0,
+$$
+и для таких $\lambda$ имеем $\Delta f(x_0) > 0$, т.е. $f(x) > f(x_0)$.
+
+Аналогично, из существования вектора $\vec{z}^* \neq \vv{\theta}$ с $\Phi_2(x_0, \vec{z}^*) < 0$ следует, что существуют сколь угодно близкие к $x_0$ точки, в которых $f(x) < f(x_0)$.
+
+Таким образом, в любой окрестности $x_0$ имеются точки с $f(x) > f(x_0)$ и с $f(x) < f(x_0)$, поэтому $x_0$ не является точкой локального экстремума.
 \end{proof}
+
+\begin{notion}
+Если $\Phi_2(x_0, h)$ "--- полуопределённая квадратичная форма (положительно или отрицательно), то теорема~\ref{ch10thm3} не даёт ответа о наличии и характере экстремума в стационарной точке. Требуется дополнительное исследование, как правило, сводящееся к непосредственному рассмотрению приращения функции.
+\end{notion}
