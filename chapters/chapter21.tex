@@ -1,154 +1,197 @@
-\part[Линейная алгебра]{Линейная алгебра}
+\chapter{Кривые второго порядка, их геометрические свойства.}
 
-\font\Large=cmr10 at 13pt
-\newcount\rowcount\rowcount=3
-\def\fudge#1{\smash{\hbox{\Large#1}}}
-\def\doublyso{\kern+2em\smash{\vrule height \rowcount em depth .2em}\hidewidth}			%for matrix
+\section{Общее уравнение кривой второго порядка}
 
-\chapter{Общее решение системы линейных алгебраических уравнений. Теорема Кронекера"--~Капелли.}\label{chapter21}
-\section{Теорема Кронекера"--~Капелли}
+\begin{definition}
+\textit{Кривой второго порядка} называется множество точек плоскости, координаты которых удовлетворяют уравнению вида
+\begin{equation}\label{21.0.general}
+  Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0,
+\end{equation}
+где $A, B, C, D, E, F \in \bbR$ и хотя бы один из коэффициентов $A, B, C$ отличен от нуля.
+\end{definition}
 
-Рассмотрим \textit{систему линейных уравнений}
-\begin{equation}\label{21.1.sys1}
-\left\lbrace\begin{array}{crl}
-a_{11}x_1+a_{12}x_2+\ldots+a_{1n}x_n=b_1\\
-a_{21}x_1+a_{22}x_2+\ldots+a_{2n}x_n=b_2\\
-\ldots \\
-a_{m1}x_1+a_{m2}x_2+\ldots+a_{mn}x_n=b_m\\ 
-\end{array}\right.\end{equation}
-Эту систему можно записать в матричном виде:
-\begin{equation*}\tag{\ref{21.1.sys1}'}
-AX=b^{\uparrow},
-\end{equation*}
-\begin{equation*}
-A=\begin{pmatrix}
-a_{11} & a_{12} & \cdots & a_{1n} \\
-a_{21} & a_{22} & \cdots & a_{2n} \\
-\hdotsfor{4} \\
-a_{m1} & a_{m2} & \cdots & a_{mn} \\
-\end{pmatrix},
-b^\uparrow=\begin{pmatrix}
-b_1 \\ b_2 \\ \vdots \\ b_m \\
-\end{pmatrix},
-X=\begin{pmatrix}
-x_1 \\ x_2 \\ \vdots \\ x_n \\
-\end{pmatrix}
-\end{equation*}
-$A$ называется \textit{основной матрицей системы}, $b^\uparrow$ "--- \textit{столбцом свободных членов}, $\widetilde A = (A|b^\uparrow)$ "--- \textit{расширенной матрицей системы}.
-\begin{defn}
-Набор векторов $\vv{a_1}$,$\vv{a_2}$,...,$\vv{a_r}$ называется \textit{базисом} множества векторов $V\neq \emptyset$, если
+\begin{notion}
+Уравнение~\eqref{21.0.general} при помощи поворота и параллельного переноса системы координат может быть приведено к одному из канонических видов: эллипса, гиперболы, параболы, а также вырожденных случаев (пара прямых, точка, пустое множество).
+\end{notion}
 
-(1) $\vv{a_1}$,\ldots,$\vv{a_r}$ линейно независимы
+\section{Эллипс}
 
-(2) $\forall v \in V \exists \lambda_1,...\lambda_r: v=\sum \limits_{i=1}^r\lambda_ia_i$
-\end{defn}
+\begin{definition}
+\textit{Эллипсом} называется геометрическое место точек плоскости, сумма расстояний от каждой из которых до двух фиксированных точек $F_1$ и $F_2$, называемых \textit{фокусами}, есть величина постоянная $2a > 0$:
+\begin{equation}\label{21.1.def}
+  \rho(P, F_1) + \rho(P, F_2) = 2a.
+\end{equation}
+\end{definition}
 
-\begin{defn}
-Упорядоченный набор чисел ($x_1, x_2, \ldots, x_n$) называется \textit{частным решением} системы \eqref{21.1.sys1}, если при его подстановке в неё получается верное равенство. \textit{Общим решением} \eqref{21.1.sys1} называется совокупность всех её решений. Система называется \textit{совместной}, если имеет хотя одно решение.
-\end{defn}
-\begin{defn}
-\textit{Рангом конечного набора векторов} называется количество векторов в базисе этого набора. \textit{Рангами матрицы по строкам} и \textit{по столбцам} называются ранги соответственно набора строк и набора столбцов матрицы.
-\end{defn}
-\begin{lemm} [о ранге матрицы]
-Для любой матрицы $A$ равны между собой её ранг по столбцам, ранг по строкам и количество строк в неупрощаемом виде (виде после отработки алгоритма Гаусса).
-\end{lemm}
-В силу этого свойства, говорят просто о \textit{ранге матрицы} $\rg A$.
-\begin{thm}[Кронекера"--~Капелли\rindex{теорема!Кронекера"--~Капелли}]
-Система линейных уравнений~\eqref{21.1.sys1} совместна тогда и только тогда, когда $\rg A = \rg \widetilde A$.
-\end{thm}
+Пусть фокусы расположены симметрично относительно начала координат: $F_1(-c, 0)$ и $F_2(c, 0)$, где $c \geq 0$. Обозначим $b^2 = a^2 - c^2 \geq 0$. Тогда из определения~\eqref{21.1.def} выводится
+
+\begin{equation}\label{21.1.canon}
+  \frac{x^2}{a^2} + \frac{y^2}{b^2} = 1, \quad a \geq b > 0
+\end{equation}
+--- \textit{каноническое уравнение эллипса}.
+
 \begin{proof}
-$\Rightarrow$: Пусть система совместна. Это означает, что
-\begin{equation*}
-\exists x_1,\ldots, x_n: x_1a_1^\uparrow +\ldots+x_na_n^\uparrow=b^\uparrow,
-\end{equation*}
-где через $a_k^\uparrow$ обозначен k-й столбец матрицы $A$. Следовательно, базис столбцов матрицы $A$  является и базисом столбцов матрицы $\widetilde A$ и $\rg A = \rg \widetilde A$.
-$\Leftarrow$: Пусть $\rg A = \rg \widetilde A$, а столбцы $a_{j_1}^\uparrow,...,a_{j_r}^\uparrow$ образуют базис матрицы $A$. Этот набор в совокупности с $b^\uparrow$ не может образовать линейно независимый набор, т.к. это повлечёт увеличение ранга, следовательно, 
-\begin{equation*}\\ 
-\exists x_{j_1},...,x_{j_r}: -b^\uparrow+x_{j_1}a_{j_1}^\uparrow+\ldots+x_{j_r}a_{j_r}^\uparrow+\sum_{j \notin \{j_1,...,j_r\}}0 a_j^\uparrow = 0,
-\end{equation*} 
-что означает, что решение существует.
+Пусть $r_1 = \rho(P,F_1)$, $r_2 = \rho(P,F_2)$. Из условия $r_1 + r_2 = 2a$ следует $r_1 = 2a - r_2$. Возводя в квадрат расстояния:
+\[
+r_1^2 = (x+c)^2 + y^2, \quad r_2^2 = (x-c)^2 + y^2.
+\]
+Вычитая: $r_1^2 - r_2^2 = 4cx$, откуда $r_1 - r_2 = \dfrac{2cx}{a}$. Совместно с $r_1 + r_2 = 2a$ получаем $r_1 = a + \dfrac{cx}{a}$, $r_2 = a - \dfrac{cx}{a}$. Подставляя в $r_2^2 = (x-c)^2+y^2$ и упрощая при $b^2 = a^2 - c^2$:
+\[
+\left(1-\frac{c^2}{a^2}\right)x^2 + y^2 = a^2 - c^2
+\;\Longrightarrow\;
+\frac{x^2}{a^2}+\frac{y^2}{b^2}=1. \qedhere
+\]
 \end{proof}
-\section{Общее решение системы линейных алгебраических уравнений}
-Напомним, что для приведения матриц к \textit{ступенчатому виду} \eqref{21.2.stairs} используется прямой ход алгоритма Гаусса. 
-\begin{equation}\label{21.2.stairs} 
-\begin{pmatrix}
-  &a_{1,j_1}& \hdotsfor{4}          &a_{1,n}     \cr 
-\fudge 0&&a_{2,j_1} &\hdotsfor{3}      &a_{2,n}     \cr
-  &   &     &\ddots&\hdotsfor{2}    &\vdots      \cr 
-  &\fudge 0 && & a_{r,j_r}  &\cdots &a_{r,n}   \cr \hline
-  &   &     &  &            &       &         \cr
-  &   &     &  &\fudge 0    &       &         \cr
-\end{pmatrix}
-\end{equation}    
-Затем применяется обратный ход алгоритма Гаусса для приведения к \textit{неупрощаемой форме}, которая при перестановке столбцов имеет вид \eqref{21.2.simplest1}.
-\begin{equation}\label{21.2.simplest1}
-\begin{pmatrix}
-  & 1 &     &   &a'_{1,r+1} &\cdots &a'_{1,n}   \cr 
-\fudge 0 & &\ddots& &\vdots &\cdots &\vdots     \cr
-  &   &     & 1 &a'_{r,r+1} &\cdots &a'_{r,n}   \cr \hline
-  &   &     &   &           &       &           \cr
-  &   & &\fudge 0  &        &       &           \cr
-\end{pmatrix}
-\end{equation}    
-\begin{thm}\label{21.2.th.common}
-Общее решение совместной системы линейных уравнений \eqref{21.1.sys1} имеет вид 
-\begin{equation}\label{21.2.common}
-Y=X_0+\sum_{j=1}^{n-r}c_jX_j, c_j \in \bbR,
+
+\begin{definition}
+\textit{Эксцентриситетом} эллипса называется величина
+\begin{equation}\label{21.1.exc}
+  \varepsilon = \frac{c}{a} \in [0, 1).
 \end{equation}
-где $X_0$ "--- частное решение, $X_1,...,X_{n-r}$ "--- линейно независимые решения однородного уравнения $AX=0$, a $r=\rg A=\rg \widetilde A$ - ранг матрицы уравнения.
-\end{thm}
+При $\varepsilon = 0$ ($c=0$, $a=b$) эллипс обращается в \textit{окружность} радиуса $a$.
+\end{definition}
+
+\begin{definition}
+\textit{Директрисами} эллипса называются прямые
+\begin{equation}\label{21.1.dir}
+  x = \pm \frac{a}{\varepsilon} = \pm \frac{a^2}{c}.
+\end{equation}
+\end{definition}
+
+\begin{theorem}[Фокально-директрисное свойство эллипса]
+Для любой точки $P$ эллипса отношение расстояния до фокуса к расстоянию до соответствующей директрисы постоянно и равно эксцентриситету:
+\begin{equation}\label{21.1.focal}
+  \frac{r_{1,2}}{d_{1,2}} = \varepsilon,
+\end{equation}
+где $d_{1,2}$ --- расстояние от точки до соответствующей директрисы.
+\end{theorem}
+
 \begin{proof}
-Прямой и обратный ход алгоритм Гаусса приводят расширенную матрицу системы (возможно, с переобозначением $x_{i_1}\rightarrow x'_1,...,x_{i_r}\rightarrow x'_r,...$) к неупрощаемому виду
-\begin{equation}\label{21.2.simplest2}
-\bordermatrix{
-\global\everycr{\noalign{\global\advance\rowcount by 1}}
-& 1 &      & r & r+1       &       & n       & \cr
-1 & 1 &      &   &a'_{1,r+1} &\cdots &a'_{1,n} & b'_1    \cr 
-  &   &\ddots&   &\vdots     &\cdots &\vdots   & \vdots  \cr
-r &   &      & 1 &a'_{r,r+1} &\cdots &a'_{r,n} & b'_r    \cr \hline
-  &   &      &   &           &       &         &         \cr 
-  &   &      &   &\fudge 0   &       &\doublyso&\fudge 0 \cr 
-},
-\everycr={}
+Для фокуса $F_2(c,0)$ и директрисы $x = \dfrac{a^2}{c}$ имеем $r_2 = a - \dfrac{cx}{a}$, $d_2 = \dfrac{a^2}{c} - x$. Тогда
+\[
+\frac{r_2}{d_2} = \frac{a - \tfrac{cx}{a}}{\tfrac{a^2}{c}-x} = \frac{\tfrac{a^2-cx}{a}}{\tfrac{a^2-cx}{c}\vphantom{\tfrac{A}{A}}} = \frac{c}{a} = \varepsilon. \qedhere
+\]
+\end{proof}
+
+\section{Гипербола}
+
+\begin{definition}
+\textit{Гиперболой} называется геометрическое место точек плоскости, модуль разности расстояний от каждой из которых до двух фиксированных точек $F_1$ и $F_2$ (\textit{фокусов}) постоянен и равен $2a > 0$:
+\begin{equation}\label{21.2.def}
+  \abs{\rho(P,F_1) - \rho(P,F_2)} = 2a.
 \end{equation}
-что соответствует системе
+\end{definition}
 
-$\begin{cases}
-x'_1+\sum \limits_{j=r+1}^n a'_{1j}x'_j=b'_1\\
-x'_2+\sum \limits_{j=r+1}^n a'_{2j}x'_j=b'_2\\
-\ldots \\
-x'_r+\sum \limits_{j=r+1}^n a'_{rj}x'_j=b'_r\\ 
-\end{cases}
-\Leftrightarrow
-\begin{cases}
-x'_1=b'_1-\sum \limits_{j=r+1}^n a'_{1j}x'_j\\
-x'_2=b'_2-\sum \limits_{j=r+1}^n a'_{2j}x'_j\\
-\ldots \\
-x'_r=b'_r-\sum \limits_{j=r+1}^n a'_{rj}x'_j\\ 
-\end{cases}$
+Расположим фокусы аналогично эллипсу: $F_{1,2}(\mp c, 0)$, $c > a > 0$. Введём $b^2 = c^2 - a^2 > 0$. Аналогично выводу канонического уравнения эллипса получим
 
-$x'_1,...x'_r$ называются \textit{главными} неизвестными, $x'_{r+1},...,x'_n$ "--- \textit{свободными}, или \textit{параметрическими}, т.к. выбор последних произволен.
+\begin{equation}\label{21.2.canon}
+  \frac{x^2}{a^2} - \frac{y^2}{b^2} = 1
+\end{equation}
+--- \textit{каноническое уравнение гиперболы}.
 
-Введём обозначения:
+\begin{definition}
+\textit{Эксцентриситетом} гиперболы называется величина
+\begin{equation}\label{21.2.exc}
+  \varepsilon = \frac{c}{a} > 1.
+\end{equation}
+\end{definition}
+
+\begin{theorem}[Асимптоты гиперболы]
+Гипербола~\eqref{21.2.canon} имеет две асимптоты:
+\begin{equation}\label{21.2.asymp}
+  y = \pm \frac{b}{a} x,
+\end{equation}
+то есть расстояние от точки гиперболы до каждой из этих прямых стремится к нулю при $\abs{x} \to \infty$.
+\end{theorem}
+
+\begin{proof}
+Расстояние от точки $\left(x_0,\, \tfrac{b}{a}\sqrt{x_0^2-a^2}\right)$ гиперболы до прямой $bx - ay = 0$:
+\[
+\rho = \frac{\abs{bx_0 - a \cdot \tfrac{b}{a}\sqrt{x_0^2-a^2}}}{\sqrt{a^2+b^2}}
+= \frac{b\abs{x_0 - \sqrt{x_0^2-a^2}}}{c}
+= \frac{b \cdot \tfrac{a^2}{\abs{x_0}+\sqrt{x_0^2-a^2}}}{c}
+\xrightarrow{x_0\to\infty} 0. \qedhere
+\]
+\end{proof}
+
+\begin{notion}
+Фокально-директрисное свойство~\eqref{21.1.focal} справедливо и для гиперболы с директрисами $x = \pm\dfrac{a^2}{c}$ и $\varepsilon > 1$.
+\end{notion}
+
+\section{Парабола}
+
+\begin{definition}
+\textit{Параболой} называется геометрическое место точек плоскости, равноудалённых от фиксированной точки $F$ (\textit{фокуса}) и фиксированной прямой $d$ (\textit{директрисы}):
+\begin{equation}\label{21.3.def}
+  \rho(P, F) = \rho(P, d).
+\end{equation}
+\end{definition}
+
+Поместим фокус в точку $F\!\left(\dfrac{p}{2}, 0\right)$, $p > 0$, а директрису $d\colon x = -\dfrac{p}{2}$. Из условия~\eqref{21.3.def}:
+\[
+\sqrt{\!\left(x-\tfrac{p}{2}\right)^{\!2}+y^2} = x + \tfrac{p}{2},
+\]
+возводя в квадрат и упрощая, получим
+
+\begin{equation}\label{21.3.canon}
+  y^2 = 2px, \quad p > 0
+\end{equation}
+--- \textit{каноническое уравнение параболы}. Величина $p$ называется \textit{параметром параболы}.
+
+\begin{notion}
+Эксцентриситет параболы равен $\varepsilon = 1$, что согласуется с фокально-директрисным определением: отношение расстояния до фокуса к расстоянию до директрисы тождественно равно $1$.
+\end{notion}
+
+\section{Приведение общего уравнения к каноническому виду}
+
+Общее уравнение~\eqref{21.0.general} приводится к каноническому виду поворотом и параллельным переносом. Запишем~\eqref{21.0.general} в матричном виде:
+
+\begin{equation}\label{21.4.matrix}
+  \vv{x}^{\top} \mathbf{A} \vv{x} + \vv{b}^{\top}\vv{x} + F = 0,
+\end{equation}
+где $\vv{x} = (x,y)^{\top}$,
+\[
+\mathbf{A} = \begin{pmatrix} A & B/2 \\ B/2 & C \end{pmatrix}, \quad \vv{b} = \begin{pmatrix} D \\ E \end{pmatrix}.
+\]
+
+\begin{enumerate}
+  \item \textbf{Поворот.} Матрица $\mathbf{A}$ симметрична, поэтому ортогонально диагонализируема: $\mathbf{A} = \mathbf{Q}\,\mathrm{diag}(\lambda_1,\lambda_2)\,\mathbf{Q}^{\top}$. Замена $\vv{x} = \mathbf{Q}\vv{x}'$ (поворот на угол $\theta$, определяемый собственными векторами) обращает в нуль смешанный член $Bxy$.
+  \item \textbf{Параллельный перенос.} После поворота уравнение принимает вид $\lambda_1 x'^2 + \lambda_2 y'^2 + D'x' + E'y' + F' = 0$. Выделяя полные квадраты по ненулевым $\lambda_k$, сдвигом начала координат убираем линейные члены.
+\end{enumerate}
+
+Тип кривой определяется знаками собственных значений $\lambda_1, \lambda_2$ матрицы $\mathbf{A}$ и знаком полного определителя
 \begin{equation}
-X'_0=\begin{pmatrix} b'_1\\ \vdots \\b'_r \\ \hline \\ \fudge 0 \\ \\ \end{pmatrix}, 
-X'_j=\bordermatrix{
-  & \cr
-  & -a'_{1,r+j} \cr
-  & \vdots  \cr
-  & -a'_{r,r+j} \cr \hline
-  &   \cr
-  & \fudge 0 \cr
-r+j& 1 \cr
-  & \fudge 0 \cr
-}, j=\overline{1,n-r}
+  \Delta = \begin{vmatrix} A & B/2 & D/2 \\ B/2 & C & E/2 \\ D/2 & E/2 & F \end{vmatrix}\!:
 \end{equation}
+\begin{itemize}
+  \item $\lambda_1 \lambda_2 > 0$, $\Delta \neq 0$ --- \textbf{эллипс} (или окружность при $A=C$, $B=0$);
+  \item $\lambda_1 \lambda_2 < 0$, $\Delta \neq 0$ --- \textbf{гипербола};
+  \item $\lambda_1 \lambda_2 = 0$ (одно собственное значение равно нулю), $\Delta \neq 0$ --- \textbf{парабола};
+  \item $\Delta = 0$ --- вырожденный случай (пара прямых, точка, пустое множество).
+\end{itemize}
 
-Тогда решение имеет вид
-\begin{equation*}
-Y'=X'_0+\sum_{j=1}^{n-r}x'_{r+j}X'_j,$$
-где 
-$$ x'_{r+j} \in \bbR, j = \overline{1,n-r}.
-\end{equation*}
-Остаётся лишь перейти к исходным переменным и получить выражение \ref{21.2.common}, где $c_j=x'_{r+j}$.
+\section{Оптические свойства кривых второго порядка}
+
+\begin{theorem}[Отражательное свойство эллипса]
+Касательная к эллипсу в любой точке $P$ образует равные углы с фокальными радиусами $PF_1$ и $PF_2$.
+\end{theorem}
+
+\begin{proof}
+Уравнение касательной к эллипсу~\eqref{21.1.canon} в точке $P(x_0, y_0)$:
+\begin{equation}\label{21.5.tang_ell}
+  \frac{x_0 x}{a^2} + \frac{y_0 y}{b^2} = 1.
+\end{equation}
+Нормаль к касательной в точке $P$ имеет направляющий вектор $\vv{n} = \left(\dfrac{x_0}{a^2},\, \dfrac{y_0}{b^2}\right)$. Прямое вычисление показывает, что косинусы углов между $\vv{n}$ и векторами $\vv{PF_1}$, $\vv{PF_2}$ совпадают, откуда следует равенство углов падения и отражения.
+\end{proof}
+
+\begin{theorem}[Отражательное свойство параболы]
+Касательная к параболе в любой точке $P$ образует равные углы с фокальным радиусом $PF$ и прямой, параллельной оси симметрии параболы.
+\end{theorem}
+
+\begin{proof}
+Уравнение касательной к параболе~\eqref{21.3.canon} в точке $P(x_0, y_0)$:
+\begin{equation}\label{21.5.tang_par}
+  y_0 y = p(x + x_0).
+\end{equation}
+Вектор нормали $\vv{n} = (-p,\, y_0)$. Угол между $\vv{n}$ и вектором $\vv{PF} = \left(\tfrac{p}{2}-x_0,\,-y_0\right)$ равен углу между $\vv{n}$ и вектором $(1, 0)$ (направление оси), что проверяется непосредственным вычислением косинусов.
 \end{proof}
