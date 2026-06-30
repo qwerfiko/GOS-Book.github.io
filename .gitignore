@@ -1,0 +1,45 @@
+﻿# Windows image file cache
+**/Thumbs.db
+**/ehthumbs.db
+
+# сonfig file
+**/*.ini
+
+# tmp files
+**/*.swp
+
+# TeX tmp files
+**/*.aux
+**/*.bbl
+**/*.blg
+**/*.synctex
+**/*.log
+**/*.dvi
+**/*.idx
+**/*.ilg
+**/*.ind
+**/*.toc
+**/*.lot
+**/*.lof
+**/*.out
+**/*.bak
+**/*.gz
+**/*.gz(busy)
+**/*.mtc*
+**/*.ptc*
+**/*.maf
+**/*.ist
+**/*.bib
+**/*.xml
+**/*.bcf
+**/*.ps
+*.mst
+**/*.synctex(busy)
+
+# Other
+**/*.pdf
+**/*.sty
+
+# Allow
+!docs/GOS-Book.pdf
+README.htm

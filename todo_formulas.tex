@@ -1,0 +1,395 @@
+\documentclass[a5paper,openany,9pt]{extbook}
+
+%Packages from structure.tex
+\usepackage[margin=1.6cm, top=1.2cm,right=1.9cm,left=1.9cm, footskip = 1 cm, headheight=20pt,headsep=0.2cm]{geometry}
+\usepackage[russian, english]{babel}
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+\usepackage[T2A]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{enumitem} 
+\usepackage{booktabs} 
+\usepackage{microtype}
+\usepackage{cmap}
+\usepackage{calc}
+\usepackage{titletoc} 
+\usepackage{fancyhdr}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{xcolor}
+\definecolor{prpl}{RGB}{150, 120, 182}
+
+% new stuff
+% \lineskiplimit=-100pt\relax
+
+% old stuff
+\include{include/header}
+\include{include/macros}
+
+\begin{document}
+\chapter*{Recommendations how to write formulas better}
+
+This information is based on \href{http://www.ctex.org/documents/shredder/src/texbook.pdf}{\textit{Knuth's TeXbook}},  AMS documentation, \href{https://tex.stackexchange.com/}{\textit{tex.stackexchange.com}} answers,  \colorbox{prpl}{\textcolor{white}{AND MY OWN PREFERENCES}}. I want to say that here are the rules to use correct command to get right spacing in math formulas. The rules which \LaTeX\ does automaticly aren't discussed here.
+
+Also look at the source code to understand those rules
+
+\begin{itemize}
+\item
+Use punctuations symbols after \verb|$*formula*$| in inline math and use them inside noninline-environments.
+
+$b=3$, где
+\begin{flalign}
+&b=3,&
+\end{flalign}
+где
+
+\item 
+Enumeration. In simple enumeration use ties with formula division in inline mode and space command \verb|\,| in noninline mode:
+
+$i=1$,~2, \ldots,~$n$.$\Bigr|$ 
+\begin{flalign}
+&i=1,\,2,\,\ldots,\,n.\Bigr|&
+\end{flalign}
+\item 
+You can also use space command \verb|\,| in inline mode, if you don't use formula separation at all. But try to avoid it as much as possible. For example, use \verb|\{$x$,\{$x$, $y$\}\}| rather than \verb|$\{x,\,\{x,\,y\}\}$|.
+
+$\Bigr|\{x,\,\{x,\,y\}\}\Bigr|$
+
+$\Bigr|$\{$x$, \{$x$, $y$\}\}$\Bigr|$
+
+\item 
+Remember that \verb|\ldots|,\verb|\cdots| produce very bad spacing in the following example \verb|$\ldots$,| 
+
+The same pattern goes assets declared by enumeration. 
+
+$X = \{x_1$,~$x_2$, \dots,~$x_n$, \dots $\},\Bigr|$
+\begin{flalign}
+&X = \{x_1,\,x_2,\,\dots,\,x_n,\,\dots \},\Bigr|&
+\end{flalign}
+
+\item
+However, for vectors and particularry for ordered pairs we use opposite pattern: no spaces at all both inline and noninle mode:
+
+$\vv X = (x_1, x_2, \dots, x_n,\dots),\Bigr|$
+\begin{flalign}
+&\vv X = (x_1,x_2,\dots,x_n,\dots),\Bigr|&
+\end{flalign}
+
+\item 
+Also we dont use spaces when enumeration is a direct part of the formula:
+
+$\forall a,b,c \in \bbR$
+
+\item
+As well, notice that numerical gaps (intervals, segments) should take no space between left and right elements both in inline and noninline mode \verb|(a;b)|,\verb|[a;b]|
+
+$\Bigr|(a;b)\Bigr|$
+\begin{flalign}
+&\Bigr|(a;b)\Bigr|&
+\end{flalign}
+Reference: Inline: \href{http://www.ctex.org/documents/shredder/src/texbook.pdf}{\textit{Knuth's TeXbook}}, page 173. Noninline: It's my own preference.
+
+\item 
+Use \verb|\quad| between mathematics statements both in inline and noninline mode, however try to avoid these constructions in inline mode.
+
+$\forall y\in Y\quad  y\in X\Bigr|$
+\begin{flalign}
+&\forall y\in Y\quad  y\in X\Bigr|&
+\end{flalign}
+
+However if there is any punctuational symbol, then use simple space with ties, space-command \verb|\| or (the most recommended) formula separation.
+\item
+Use ``\verb=\,\big|\,='' and in sets as relation symbol
+
+$\{x \,\big|\ 1 < x < 2\}\Bigr|$
+\begin{flalign}
+&\{x \,\big|\ 1 < x < 2\}\Bigr|&
+\end{flalign}
+Notice that we have no additional spaces after the first bracket and before the final bracket.
+\item
+Use ``\verb=\setminus='' for set minus operation. Not backslashes or smth like this.
+
+\item
+Phrases like i.e., e.g. requires ties \~ or spacecommand \verb|\ | after it because otherwise the space will be slighty bigger than recommended.  
+
+$\Bigr|$i.e.~author$\Bigr|$
+
+$\Bigr|$i.e.\ author$\Bigr|$
+
+$\Bigr|$i.e. author$\Bigr|$
+
+Remember that т.е. doesnt need comma after it, because it is union.
+
+
+\item
+Parentheses. When you want to use it with the word ``respectively'' then use this word in the last bracket. Do it like in the following russian way:
+
+Будем говорить, что на множестве $G$ определена операция сложения <<$+$>> (умножения <<$\cdot$>>), если любой упорядоченной паре элементов ($a$,~$b$) элементов $G$ поставлен в соответствие элемент $y = a + b$ (соотв., $y = a\cdot b$)
+
+Try to avoid 3 or more parentheses brackets. Try to edit sentences or just make new one additional phrase.
+
+\item 
+
+Because of bug use this: 
+
+\verb|\end{itemize}\vspace{-1.0\baselineskip}\end{defn}|
+
+when itemize and defn come to the end of the page. !Actually I need to solve this question on stackexchange.
+
+\item 
+
+Use \verb|\dfrac{1}{a}| in inline maths, because i dont like standard latex text-style fractions. They are too small, aren't they?
+
+$a / b =  \dfrac{a}{b} \triangleq a \cdot \dfrac{1}{b}$; 
+
+$a / b =  \frac{a}{b} \triangleq a \cdot \frac{1}{b}$; 
+
+\item 
+
+Try to avoid \verb|\Longleftrightarrow|, \verb|\Rightarrow| in order to give more mathematical text rather than lecture's summary.
+
+\item 
+About text in noninline equations. In noninline equations use \verb|\,\text{где }| or \verb|\,\text{где }\ | or the simplest \verb|\text{, где }| like in examples below:
+
+$\Bigl| \dfrac{(z - a)^n}{(\zeta - a)^{n + 1}} f(\zeta) \Bigr| \le \dfrac{M}{r_1} \cdot q^n$, где $M = \sup\limits_{\zeta \in \gamma_{r_1}} |f(\zeta)| < +\infty,\Bigr|$
+\begin{flalign}
+&\Bigl| \frac{(z - a)^n}{(\zeta - a)^{n + 1}} f(\zeta) \Bigr| \le \frac{M}{r_1} \cdot q^n, \,\text{где } M = \sup_{\zeta \in \gamma_{r_1}} |f(\zeta)| < +\infty,\Bigr|&
+\end{flalign}
+\begin{flalign}
+&\Bigl| \frac{(z - a)^n}{(\zeta - a)^{n + 1}} f(\zeta) \Bigr| \le \frac{M}{r_1} \cdot q^n, \,\text{где}\ M = \sup_{\zeta \in \gamma_{r_1}} |f(\zeta)| < +\infty,\Bigr|&
+\end{flalign}
+\begin{flalign}
+&\Bigl| \frac{(z - a)^n}{(\zeta - a)^{n + 1}} f(\zeta) \Bigr| \le \frac{M}{r_1} \cdot q^n\text{, где } M = \sup_{\zeta \in \gamma_{r_1}} |f(\zeta)| < +\infty,\Bigr|&
+\end{flalign}
+
+\item
+
+\verb|\text{ и}\ | OR \verb|\ \text{и}\ | OR the simplest \verb|\text{ и }|
+
+$\Bigr|+\infty + a = +\infty$ и $+\infty- a = +\infty,\, \forall a \in \bbR\cup\{+\infty\}; \Bigr|$
+\begin{flalign}
+&\Bigr|+\infty + a = +\infty \text{ и}\ {+\infty}- a = +\infty,\, \forall a \in \bbR\cup\{+\infty\}; \Bigr|&
+\end{flalign}
+\begin{flalign}
+&\Bigr|+\infty + a = +\infty\ \text{и}\ {+\infty}- a = +\infty,\, \forall a \in \bbR\cup\{+\infty\}; \Bigr|&
+\end{flalign}
+\begin{flalign}
+&\Bigr|+\infty + a = +\infty\text{ и } {+\infty}- a = +\infty,\, \forall a \in \bbR\cup\{+\infty\}; \Bigr|&
+\end{flalign}
+
+\item 
+Remember about  \verb|{+\infty}|
+\item
+When you want to show 2 or more different equations on the same line in noninline mode then consider using \verb|;\qquad| 
+\begin{flalign}
+&a(y) = \lim_{l \to +\infty}\frac{1}{\pi}\int_{-l}^{l} f(t)\cos(yt)\,dt;\qquad 
+b(y) = \lim_{l \to +\infty}\frac{1}{\pi}\int_{-l}^{l} f(t)\sin(yt)\,dt&
+\end{flalign}
+
+\item 
+Use \verb|,\,| in noninline math with commas so it looks the same in inline mode and noninline mode:
+
+$\phi_{\nu}(x) = e^{i\nu\frac{\pi}{l}x},\, \nu \in \bbZ,\Bigr|$
+\begin{flalign}
+&\phi_{\nu}(x) = e^{i\nu\frac{\pi}{l}x},\, \nu \in \bbZ,\Bigr|&
+\end{flalign}
+
+\item
+Use \verb=\,= before differentials in integrals \verb=\int f(x)\,dx=
+\begin{flalign}
+&\int f(x)\, dx&
+\end{flalign}
+
+\item
+Use ``\verb=\,='' after factorials in math formulas \verb=\frac{n!}{k!\,(n-k)!}=
+\begin{flalign}
+&\frac{n!}{k!\,(n-k)!}&
+\end{flalign}
+
+\item Remember about index bug with \verb|"--~|... so you should just use 
+
+\begin{center}
+\verb|Условия Коши"--~Римана\rindex{условия!Коши---Римана}|
+\end{center}
+
+\item USE ; in lists to separate items-elements:
+\begin{enumerate}
+\item
+$M\in G$;
+\item
+$\forall x \in G\quad x \le M \quad (\text{соотв., } x \ge M)$.
+\end{enumerate}
+\item
+Remember about \verb|r(f;x_0,x)|
+
+\item 
+
+THINK of the last expression or smth like n=1,n here pls
+
+\begin{alignat*}{1}
+&{+\infty} + a = +\infty \text{ и }  {+\infty}- a = +\infty\quad \forall a \in \bbR\cup\{+\infty\}; \\
+&{-\infty} - a = -\infty \text{ и } {-\infty} + a = -\infty\quad \forall a \in \bbR\cup\{-\infty\}; \\
+&{+\infty}\cdot a = +\infty \text{ и } {-\infty}\cdot a = -\infty\quad \forall a > 0,\,  a\in\bbR\cup\{+\infty\};\\ 
+&{+\infty}\cdot a = -\infty \text{ и } {-\infty}\cdot a = +\infty \quad \forall a < 0,\,  a\in\bbR\cup\{-\infty\};\\
+&a/ (-\infty) = 0 \text{ и } a / (+\infty) = 0 \quad \forall a \in \bbR;
+\end{alignat*}
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+VERY OLD STUFF NEEED CHECHING BRO
+\section{COLON}
+
+\begin{itemize}
+\item
+Use \verb|\mathbin{:}| in ratios:
+$$x\mathbin{:}y\mathbin{:}z = 3\mathbin{:}4\mathbin{:}5$$
+
+\item
+Use ``\verb=\colon='' in mappings:
+$$f\colon A \to B$$
+
+\item[\colorbox{prpl}{\textcolor{white}{MY}}\ $\bullet$]
+Use ``\verb={:}\quad='' or macros ``\verb=\cquad='', when it's a punctuation symbol in \textbf{non-inline math} and between math statements like \verb|A\cquad B| anywere.
+$$\forall x \in A\cquad f(x) = 12$$
+But use simple \textbf{formula separation} \verb|$\forall x \in A$: $f(x) = 12$| like here: in \textbf{inline math}
+\begin{center}
+$\forall x \in A$: $f(x) = 12$
+\end{center}
+
+
+\end{itemize}
+	
+\section{SPACING}
+
+\begin{itemize}
+
+\item[\colorbox{prpl}{\textcolor{white}{MY}}\ $\bullet$]
+Use \verb|\quad| between logic elements in \textbf{non-inline math}
+$$
+\forall A \in B \quad \mu A < \mu B 
+$$
+
+But use simple formulas divison ``\verb=$\forall A \in B$ $\mu A < \mu B$='' with usual spaces in inline math in \textbf{inline math} (or consider quad idk actually): 
+\begin{center}
+$\forall A \in B$ $\mu A < \mu B$.
+\end{center}
+Use punctuation symbols if needed after \$-symbol.
+\item[\colorbox{prpl}{\textcolor{white}{MY}}\ $\bullet$]
+Use ``\verb|\quad |'' before parenthesis in \textbf{non-inline math}:
+$$
+\forall M' < M \quad (\forall M' > M)\quad \exists x\in G\cquad x>M' \quad (x<M')
+$$
+(?)But again use simple formulas divison with usual spaces in \textbf{inline math}.
+
+\item 
+Use comma without any spaces like this \verb|$a,b$| when comma actually is a part of formula, for example
+\begin{center}
+$1<a,b<2$. 
+\end{center}
+But when it is not part of the formula (for example, when it is range 1, 2, 3, \dots) use spaces in \textbf{non-inline math} ``\verb|~|'' or formulas divison in \textbf{inline math}. Dont put \verb|\,| after \verb|\dots,\ldots,\cdots|
+$$
+\phi_1(x), \ \phi_2(x),\ \ldots,\ \phi_n(x), \ldots
+$$
+$$
+\phi_1(x), \ \phi_2(x),\ \dots,\ \phi_n(x), \ldots
+$$
+
+$\phi_1(x)$,~$\phi_2(x)$, \ldots,~$\phi_n(x), \ldots$
+
+$\phi_1(x)$,~$\phi_2(x)$, \dots,~$\phi_n(x), \ldots$
+
+Prove that $(1-x)^{-1}=1+x+x^2+\cdots$.
+
+Prove that $(1-x)^{-1}=1+x+x^2+\cdots$.
+
+Clearly $a_i<b_i$ for $i=1$,~2, $\ldots$,~$n$.
+
+Clearly $a_i<b_i$ for $i=1$,~2, $\dots\,$,~$n$.
+
+Clearly $a_i<b_i$ for $i=1$,~2, $\dots$,~$n$.
+
+Clearly $a_i<b_i$ for $i=1$,~2, $\cdots$,~$n$.
+
+
+Сonclusion: USE \verb|dots| without any space-commands in this situations.
+
+
+\item 
+\verb|$x_1$,~$x_2$,~\dots, $x_n$,~\dots|.
+
+\begin{center}
+$x_1$,~$x_2$,~\dots, $x_n$,~\dots
+\end{center}
+
+\textit{Reference:} \href{https://tex.stackexchange.com/questions/115030/using-commas-in-mathematical-formulas}{$tex.stackexchange.com/...$}
+
+Refence: \href{http://www.ctex.org/documents/shredder/src/texbook.pdf}{\textit{texbook.pdf}}, page 172
+
+\item 
+\verb|\exists!| is actual command for exists the only one! $\exists! с \in \bbR$
+\end{itemize}
+
+\section{CORRECT SYMBOLS}
+
+\begin{itemize}
+\item
+Use ``\verb=\,\big|\,='' and in sets as relation symbol
+$$\{\,x : 1 < x < 2\,\}.$$
+\item
+Use ``\verb=\setminus='' for set minus operation. Not backslashes or smth like this.
+$$
+A = B \setminus C
+$$
+\item 
+Use \verb|\ldots| between binary relation symbols like ``+'' and \verb|\dots| with commas in enumeration.
+$$
+\phi_1(x),\ \ldots,\ \phi_n(x), \ldots,\quad x_1 + \ldots + x_2 + \ldots = 12.
+$$
+Use \verb|\dots| when you don't care (it's fine btw because \LaTeX\ replaces dots either with cdots or with ldots). Do not use simple \verb|$...$|.
+
+Refence: \href{http://www.ctex.org/documents/shredder/src/texbook.pdf}{\textit{texbook.pdf}}, page 172
+\item 
+Please use \verb=\accentset{*}{L}^{R}_1=:
+$$
+\accentset{*}{L}^{R}_1
+$$
+\end{itemize}
+\section{SMALL PLACEMENT DETAILS}
+\begin{itemize}
+\item[\colorbox{prpl}{\textcolor{white}{MY}}\ $\bullet$]
+Do not use ``\verb=\limits='' with \verb=\int=,\verb=\int=, etc.. I am fine with integration interval to be a side of integral-symbol.
+$$
+\int_\Delta{f(x) \phi_k(x)}\,dx=a_k\int_\Delta|\phi_k(x)|^2\,dx,
+$$
+But \verb=$\iint\limits$=
+\end{itemize}
+
+\section{About <<Ёфикации>>}
+\begin{itemize}
+\item
+Sorry bro, but we don't want to use letter <<ё>>. Use <<е>> instead.
+\end{itemize}
+
+\section{Formulas in longtables}
+
+We use \verb=\textstyle= in formulas in longtable in our formulas appendix, if it improves quality of reading. Also I like to "rescale" tables with changing font sizes into \verb=\footnotesize=.
+\end{document}
