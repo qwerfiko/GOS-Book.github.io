@@ -43,3 +43,4 @@
 # Allow
 !docs/GOS-Book.pdf
 README.htm
+GOS-Book.fdb_latexmk
