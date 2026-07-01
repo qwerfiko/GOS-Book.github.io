@@ -1,204 +1,124 @@
-\chapter[Формула Остроградского"--~Гаусса. Соленоидальные векторные поля.\protect\newline]{Формула Остроградского"--~Гаусса. Соленоидальные векторные поля.}
-
 \section{Формула Остроградского"--~Гаусса}
 
 \begin{defn}
-Область $G \subset \bbR^3$ называется элементарной относительно оси $z$ в прямоугольной декартовой системе координат $(O, x, y, z)$, если 
-\begin{equation} \label{ch15eq1}
-G = \{\, (x,y,z) \in \bbR^3\,\big|\, (x,y) \in g, \quad \phi_1(x,y) < z < \phi_2(x,y) \quad \forall (x,y) \in g\,\}, 
-\end{equation}
-где $g$ "--- ограниченная область в $\bbR^2$ с кусочно-гладкой границей $\partial g$ и функции $\phi_1$, $\phi_2$ определены, непрерывны на замыкании области $\overline{g}$ и непрерывно-дифференцируемы на $g$.
+Область $G \subset \bbR^3_{xyz}$ называется \textit{канонической\rindex{область!каноническая в $\bbR^3$}}, если она одновременно задаётся как неравенствами
+$$
+\psi(x, y) < z < \varphi(x, y), \quad (x, y) \in G_1
+$$
+($G_1$ "--- измеримая область в $\bbR^2_{xy}$), где функции $\psi$ и $\varphi$ непрерывны в $\overline{G}_1$, так и неравенствами
+$$
+\xi(y, z) < x < \eta(y, z), \quad (y, z) \in G_2
+$$
+($G_2$ "--- измеримая область в $\bbR^2_{yz}$), где функции $\xi$ и $\eta$ непрерывны в $\overline{G}_2$, а также неравенствами
+$$
+\alpha(z, x) < y < \beta(z, x), \quad (z, x) \in G_3
+$$
+($G_3$ "--- измеримая область в $\bbR^2_{zx}$), где функции $\alpha$ и $\beta$ непрерывны в $\overline{G}_3$.
+
+Замыкание канонической области является простым множеством одновременно относительно всех трёх координатных осей.
 \end{defn}
 
-Аналогично определяется область в $\bbR^3$, элементарная относительно осей $x,y$.
+Формула Остроградского"--~Гаусса связывает значение поверхностного интеграла второго рода по границе области в $\bbR^3$ со значением некоторого тройного интеграла по всей области.
+
+\begin{thm}[формула Остроградского"--~Гаусса]
+Пусть $G$ "--- каноническая область в пространстве $\bbR^3$, векторное поле $\vec{a}(x, y, z) = (P, Q, R)^T$ непрерывно дифференцируемо в $\overline{G}$. Тогда
+$$
+\iiint\limits_G \div \vec{a}\,dx\,dy\,dz = \iint\limits_{\partial G} (\vec{a}, d\vec{S}), \quad \text{т.е.}
+$$
+$$
+\iiint\limits_G \left( \pd{P}{x} + \pd{Q}{y} + \pd{R}{z} \right) dx\,dy\,dz = \iint\limits_{\partial G} \bigl( P\,dy\,dz + Q\,dz\,dx + R\,dx\,dy \bigr)
+$$
+(граница области ориентирована внешней нормалью).
+\end{thm}
 
 \begin{notion}
-Так как область $g$ ограничена и ее граница является кусочно-гладкой, то граница имеет нулевую меру Жордана, а $g$ "--- измеримо по Жордану, $\partial g$ "--- компакт.
+Доказательство теоремы проходит для более общего случая, когда $P, Q, R$ непрерывны в $\overline{G}$, $\pd{P}{x}$, $\pd{Q}{y}$, $\pd{R}{z}$ непрерывны и ограничены в $G$, причём существуют конечные пределы
+\begin{equation*}
+\begin{aligned}
+&\lim_{z \to \varphi(x,y)-0} \pd{R}{z}, \quad \lim_{z \to \psi(x,y)+0} \pd{R}{z}, \quad (x, y) \in \overline{G}_1, \\
+&\lim_{x \to \eta(y,z)-0} \pd{P}{x}, \quad \lim_{x \to \xi(y,z)+0} \pd{P}{x}, \quad (y, z) \in \overline{G}_2, \\
+&\lim_{y \to \beta(z,x)-0} \pd{Q}{y}, \quad \lim_{y \to \alpha(z,x)+0} \pd{Q}{y}, \quad (z, x) \in \overline{G}_3
+\end{aligned}
+\end{equation*}
+(обозначения как в определении 21.4).
 \end{notion}
 
-\begin{lemm} \label{ch15lemm1}
-Пусть область $G$ элементарна относительно оси $z(x,y)$. Тогда если функция $f$ определена и непрерывна на замыкании $\overline{G}$, и ее частная производная $\frac{\partial f}{\partial z}, \textit{или }\frac{\partial f}{\partial x}, \textit{или }\frac{\partial f}{\partial y}$ непрерывна и ограничена на $G$, то 
-\begin{equation} \label{ch15eq2z}
-\iiint\limits_{G} \frac{\partial f}{\partial z}\,dx\,dy\,dz = \iint\limits_{\partial	G_{\textit{внеш}}} f \,dx\,dy,
-\end{equation}
-или
-\begin{equation} \label{ch15eq2x}
-\iiint\limits_{G} \frac{\partial f}{\partial x}\,dx\,dy\,dz = \iint\limits_{\partial	G_{\textit{внеш}}} f \,dy\,dz,
-\end{equation}
-или
-\begin{equation} \label{ch15eq2y}
-\iiint\limits_{G} \frac{\partial f}{\partial y}\,dx\,dy\,dz = \iint\limits_{\partial	G_{\textit{внеш}}} f \,dx\,dz,
-\end{equation}
-где поверхностные интегралы берутся по внешней относительно $G$ стороне поверхности $\partial G$.
-\end{lemm}
-
 \begin{proof}
-Область $G$ задана условием $(\ref{ch15eq1}) \; \Rightarrow \; \partial G = S_1 \cup S_2 \cup S_0$, где $S_{1,2} = \{ (x,y) \in \overline{g}, \; z = \phi_{1,2}(x,y) \}$, $S_0 = \{ (x,y) \in \partial g, \phi_1(x,y) \le z \le \phi_2(x,y) \}$ 
+По теореме о сведении кратного интеграла к повторному, применённой к $\overline{G}$ как к простому множеству относительно оси $z$,
+$$
+\iiint\limits_{\overline{G}} \pd{R}{z}\,dx\,dy\,dz = \iint\limits_{\overline{G}_1} dx\,dy \int\limits_{\psi(x,y)}^{\varphi(x,y)} \pd{R(x, y, z)}{z}\,dz.
+$$
+Тройной интеграл существует по теореме 19.5 (в более общем случае по теореме 19.9). Так как граница области $G$ состоит из графиков непрерывных функций $z = \varphi(x, y)$ и $z = \psi(x, y)$ на измеримом компакте $\overline{G}_1$, а также части цилиндрической поверхности, то $\mu \partial G = 0$. Тройной интеграл по множеству $G$ такой же, как и по множеству $\overline{G}$.
 
-$G = \{ (x,y,z) \in \bbR^3: \; (x,y) \in g, \; \phi_1(x,y) < z < \phi_2(x,y) \; \forall (x,y) \in g \} \; \Rightarrow \; \partial G$ "--- кусочно-гладкая поверхность.
+При фиксированных $(x, y) \in G_1$ функция $R(x, y, z)$ непрерывна по $z$ на отрезке $[\psi(x, y); \varphi(x, y)]$, непрерывно дифференцируема на интервале $(\psi(x, y); \varphi(x, y))$ и $\pd{R}{z}$ имеет конечные пределы в концах интервала. С учётом теоремы 4.16 эта функция непрерывно дифференцируема на $[\psi(x, y); \varphi(x, y)]$, и по формуле Ньютона"--~Лейбница
+$$
+\int\limits_{\psi(x,y)}^{\varphi(x,y)} \pd{R(x, y, z)}{z}\,dz = R(x, y, \varphi(x, y)) - R(x, y, \psi(x, y)).
+$$
 
-$\displaystyle\iint\limits_{S_{2_{\textit{внеш}}}} f \,dx\,dy = \displaystyle\iint\limits_g f(x,y,\phi_2(x,y)) \,dx\,dy$
-
-\insertpicture{ch15pict1}{0.3}
-$\displaystyle\iint\limits_{S_{1_{\textit{внеш}}}} f \,dx\,dy = - \displaystyle\iint\limits_g f(x,y,\phi_1(x,y)) \,dx\,dy$
-
-$\displaystyle\iint\limits_{S_{0_{\textit{внеш}}}} f \,dx\,dy = 0$, так как на $S_0 \; \vv{n}_{\textit{внеш}(x,y,z) = (n_x, n_y, 0)}$
-
-$\Rightarrow$
-
-$\displaystyle\iint\limits_G f \,dx\,dy = \displaystyle\iint\limits_g (f(x,y,\phi_2(x,y)) - f(x,y,\phi_1(x,y))) \,dx \,dy$
-
+Применяя сведение тройного интеграла к повторному, имеем
 \begin{multline*}
-\iiint\limits_G \dfrac{\partial f}{\partial z} \,dx \,dy \,dz = \iint\limits_g \,dx \,dy \int\limits_{\phi_1(x,y)}^{\phi_2(x,y)} \dfrac{\partial f}{\partial z}(x,y,z) \,dz =\\= \iint\limits_g f(x,y,\phi_2) - f(x,y,\phi_1) \,dx \,dy\tag*{\qedhere}
+\iiint\limits_G \pd{R}{z}\,dx\,dy\,dz = \iint\limits_{\overline{G}_1} dx\,dy \int\limits_{\psi(x,y)}^{\varphi(x,y)} \pd{R(x, y, z)}{z}\,dz = \\
+= \iint\limits_{\overline{G}_1} R(x, y, \varphi(x, y))\,dx\,dy - \iint\limits_{\overline{G}_1} R(x, y, \psi(x, y))\,dx\,dy = \\
+= \iint\limits_{\Gamma_\varphi \uparrow} R(x, y, z)\,dx\,dy - \iint\limits_{\Gamma_\psi \uparrow} R(x, y, z)\,dx\,dy,
 \end{multline*}
+где последние два поверхностных интеграла второго рода берутся по верхним сторонам графиков соответствующих непрерывных функций на компакте $\overline{G}_1$ (см. определение 20.17). Внешняя сторона $\partial G$ соответствует верхней стороне графика функции $\varphi$ и нижней стороне графика функции $\psi$, поэтому в последнее выражение интегралы по внешним сторонам соответствующих кусков $\partial G$ войдут со знаком <<$+$>> (см. рис. 21.1).
+
+Остался нерассмотренным интеграл $\iint\limits_S R(x, y, z)\,dx\,dy$, где $S$ "--- часть цилиндрической поверхности, входящая в $\partial G$ (см. рис. 21.1). Но для этого интеграла соответствующая вектор-функция $\vec{a} = (0, 0, R)^T$, а вектор $\vec{\nu}$ нормали к $S$ ортогонален оси $z$, поэтому $(\vec{a}, \vec{\nu}) = 0$, и
+$$
+\iint\limits_S R\,dx\,dy = \iint\limits_S (\vec{a}, \vec{\nu})\,dS = 0.
+$$
+
+Окончательно имеем
+$$
+\iiint\limits_G \pd{R}{z}\,dx\,dy\,dz = \iint\limits_{\partial G} R(x, y, z)\,dx\,dy,
+$$
+где поверхностный интеграл второго рода берётся по внешней стороне $\partial G$. Аналогично, рассматривая $\overline{G}$ как простое множество относительно осей $x$ и $y$, получим
+$$
+\iiint\limits_G \pd{P}{x}\,dx\,dy\,dz = \iint\limits_{\partial G} P(x, y, z)\,dy\,dz,
+$$
+$$
+\iiint\limits_G \pd{Q}{y}\,dx\,dy\,dz = \iint\limits_{\partial G} Q(x, y, z)\,dz\,dx.
+$$
+Складывая полученные три равенства, придём к нужной формуле.
 \end{proof}
 
-\begin{cons}
-Лемма $\ref{ch15lemm1}$ для $x$ и для $y$ доказывается аналогично.
-\end{cons}
+Поверхностный интеграл второго рода в теории поля называют \textit{потоком\rindex{поток векторного поля}} векторного поля через выбранную сторону поверхности. Таким образом, поток непрерывно дифференцируемого векторного поля через внешнюю сторону границы канонической области в $\bbR^3$ равен тройному интегралу от дивергенции поля по всей области.
 
-\begin{thm} [Теорема Остроградского"--~Гаусса]
-Пусть область $G \subset \bbR^3$ элементарна относительно всех координатных осей. Тогда если функции $P,Q,R$ определены и непрерывны на $\overline{G}$, а частные производные $P'_x, Q'_y, R'_z$ "--- непрерывны и ограничены на $G$, то справедлива \textit{формула Остроградского"--~Гаусса}\rindex{формула!Остроградского"--~Гаусса}:
+Имеет место следующее обобщение этой теоремы.
 
-\begin{equation} \label{ch15eq3}
-\iiint\limits_G (P'_x + Q'_y + R'_z) \,dx\,dy\,dz = \iint\limits_{\partial G_{\textit{внеш}}} P\,dy\,dz + Q\,dz\,dx + R\,dx\,dy,
-\end{equation}
-где $\partial G_{\textit{внеш}}$ "--- внешняя относительно области $G$ сторона поверхности $G$.
-\end{thm}
-\begin{proof}
-$(\ref{ch15eq3}) \Leftarrow (\ref{ch15eq2x}), (\ref{ch15eq2y}), (\ref{ch15eq2z}).$
-\end{proof}
-
-\begin{lemm}
-Пусть область $G \subset \bbR^3$ можно разрезать кусочно-гладкой поверхностью $\Sigma \subset G$ на две области $G_1$ и $G_2$, каждая из которых элементарна относительно координатной оси $z$. Тогда если функция $f$ определена и непрерывна на $\overline{G}$ и ее частная производная $f'_z$ непрерывна и ограничена на $G$, то справедлива формула ($\ref{ch15eq2z}$).
-\end{lemm}
-
-\begin{proof}
-$G = G_1 \cup G_2$
-
-$\partial G_{1_{\textit{внеш}}} = \partial G'_{\textit{внеш}} \cup \Sigma_{1_{\textit{внеш}}}$
-
-$\partial G_{2_{\textit{внеш}}} = \partial G''_{\textit{внеш}} \cup \Sigma_{2_{\textit{внеш}}}$
-
-$\partial G_{\textit{внеш}} = \partial G'_{\textit{внеш}} \cup \partial G''_{\textit{внеш}}$
-
-\begin{equation*}
-\left.\begin{aligned}
-\Sigma_{1_{\textit{внеш}}} \\ 
- \Sigma_{2_{\textit{внеш}}}
-\end{aligned} \right\} \quad  \textit{это поверхности } \Sigma \textit{с противоположными ориентациями}.
-\end{equation*}
-\insertpicture{ch15pict2}{0.12}
-\begin{equation} \label{ch15eqA}
-\iint\limits_{\partial G_{1_{\textit{внеш}}}} f \,dx\,dy + \iint\limits_{\partial G_{2_{\textit{внеш}}}} f \,dx\,dy = \iint\limits_{G_{\textit{внеш}}} f\,dx\,dy
-\end{equation}
-
-\begin{equation} \label{ch15eqB}
-\iiint\limits_{G_{1,2}} \frac{\partial f}{\partial z}\,dx\,dy\,dz = \iint\limits_{\partial G_{1,2_{\textit{внеш}}}} f \,dx,dy
-\end{equation}
-
-\begin{equation} \label{ch15eqC}
-\iiint\limits_{G} \frac{\partial f}{\partial z}\,dx\,dy\,dz = \iiint\limits_{G_1} \frac{\partial f}{\partial z}\,dx\,dy\,dz + \iiint\limits_{G_2} \frac{\partial f}{\partial z}\,dx\,dy\,dz 
-\end{equation}
-
-$(\ref{ch15eqA}, \ref{ch15eqB}, \ref{ch15eqC}) \; \Rightarrow \; (\ref{ch15eq2z})$
-\end{proof}
-
-\begin{thm}
-Пусть область $G \subset \bbR^3$ такая, что для каждой их трех координатных осей ее можно конечным числом кусочно-гладких поверхностей разрезать на конечное число областей, элементарных относительно соответствующей оси. Тогда если функции $P,Q,R$ непрерывны на $\overline{G}$, а их частные производные $P'_x, Q'_y, R'_z$ непрерывны и ограничены на $G$, то справедлива \textit{формула Остроградского"--~Гаусса} ($\ref{ch15eq3}$).
+\begin{thm}[21.1$'$]
+Пусть $G$ "--- ограниченное открытое множество в $\bbR^3$, граница $\partial G$ которого состоит из конечного числа КГП. При этом $G$ разбивается на конечное число канонических областей $G_1, \ldots, G_N$. Это значит, что $\overline{G}_1, \ldots, \overline{G}_N$ образуют разбиение $\overline{G}$; разные $G_i$ не имеют общих точек, а $\overline{G}_i$ могут иметь лишь общие участки границ. Тогда
+$$
+\iiint\limits_G \div \vec{a}\,dx\,dy\,dz = \iint\limits_{\partial G} (\vec{a}, d\vec{S}),
+$$
+если векторное поле $\vec{a}$ непрерывно дифференцируемо в $\overline{G}$ (граница $G$ ориентирована внешней нормалью).
 \end{thm}
 
-\begin{thm}
-Пусть область $G$ "--- ограниченная область в $\bbR^3$, граница которой состоит из конечного числа гладких поверхностей. Пусть функции $P,Q,R$ определены и непрерывны на замыкании $\overline{G}$. Тогда если она непрерывно-дифференцируема на $G$, то справедлива формула ($\ref{ch15eq3}$).
-\end{thm}
-\section{Соленоидальные векторные поля.}
+
+\section{Соленоидальные векторные поля}
 
 \begin{defn}
-Непрерывно-дифференцируемое векторное поле $\vv{a}(M)$, $M \in G$ называется \textit{соленоидальным}\rindex{поле!соленоидальное} в области $G$, если 
-\begin{equation} \label{ch15.2eq1}
-\forall M \in G \quad \div \vv{a}(M) = 0
-\end{equation}
+Векторное поле $\vec{a}$ называется \textit{соленоидальным\rindex{векторное поле!соленоидальное}} в области $G \subset \bbR^3$, если поток этого поля через любую замкнутую КГП $S \subset G$ равен нулю.
 \end{defn}
 
 \begin{thm}
-Непрерывно-дифференцируемое векторное поле $\vv{a}(M)$, $M \in G$ является соленоидальным в области $G$ $\Leftrightarrow$ для любой замкнутой области $\overline{g}$ такой, что $\overline{g} \subset G$ и $\partial g$ - кусочно-гладкая граница области $g$, выполняется равенство:
-
-\begin{equation} \label{ch15.2eq2}
-\iint\limits_{\partial g_{\textit{внеш}}} \vv{a} \,d\vv{s} = 0
-\end{equation}
+Если непрерывно дифференцируемое векторное поле $\vec{a}$ соленоидально в области $G \subset \bbR^3$, то $\div \vec{a} = 0$ в области $G$. Обратно, если в объёмно односвязной области $G \subset \bbR^3$ для непрерывно дифференцируемого векторного поля $\vec{a}$ выполняется равенство $\div \vec{a} = 0$, то поле $\vec{a}$ соленоидально в $G$.
 \end{thm}
 
 \begin{proof}
-Пусть выполняется ($\ref{ch15.2eq1}$). Пусть $g$ "--- область: $\overline{g} \subset G$ и $\partial g$ "--- кусочно-гладкая поверхность.
-
-Тогда так как $\vv{a}$ "--- непрерывно-дифференцируемое векторное поле в $G$, по формуле Остроградского"--~Гаусса:
-
+Если точка $M_0 \in G$, то по теореме 21.2 о геометрическом смысле дивергенции
 $$
-\iint\limits_{\partial \overline{g}} \vv{a} \,d\vv{s} = \iiint\limits_g \div \: \vv{a}(M) \,dg = 0, \; \textit{из } (\ref{ch15.2eq1}) 
+\div \vec{a}(M_0) = \lim_{k \to \infty} \frac{\iint\limits_{\partial G_k} (\vec{a}, d\vec{S})}{\mu G_k},
 $$
+где в качестве $G_k$ можно взять последовательность окрестностей точки $M_0$, радиусы которых стремятся к нулю. Так как все интегралы в этом равенстве равны нулю при $G_k \subset G$ (т.е. при $k \geqslant k_0$), то $\div \vec{a}(M_0) = 0$, а $M_0$ "--- произвольная точка $G$. Первая часть теоремы доказана.
 
-$\Rightarrow$ из ($\ref{ch15.2eq1}$) $\Rightarrow$ ($\ref{ch15.2eq2}$)
-
-Пусть выполняется ($\ref{ch15.2eq2}$), $M \in G$.
-$\Rightarrow \; \exists \delta > 0: \; O_\delta \subset G \Rightarrow$
-
-$$ \; \div \: \vv{a}(M) = \lim\limits_{r \to +0}\left( \frac{1}{\frac{4}{3}\pi r^3}\displaystyle\iint\limits_{S^{+}_M(r)}a \,d\vv{s} \right) = 0,$$ где $S^{+}_M(r)$ "--- сфера с центром в точке $M$ радиуса $r, \: r \in (0, \delta)$.
-
-$(\ref{ch15.2eq2}) \Rightarrow (\ref{ch15.2eq1})$
+Обратно, пусть $\div \vec{a} = 0$ в объёмно односвязной области $G$, а $S$ "--- замкнутая КГП в $G$. В силу объёмной односвязности $G$ поверхность $S$ является границей ограниченного открытого множества $D \subset G$. По формуле Остроградского"--~Гаусса (мы приняли без доказательства, что формула Остроградского"--~Гаусса справедлива в этом общем случае)
+$$
+\iint\limits_S (\vec{a}, d\vec{S}) = \iiint\limits_D \div \vec{a}\,dx\,dy\,dz = 0
+$$
+(поверхность $S$ ориентирована внешней нормалью). Так как $\iint\limits_S (\vec{a}, d\vec{S}) = 0$ по любой замкнутой КГП в $G$, то поле $\vec{a}$ соленоидально в области $G$.
 \end{proof}
 
-\begin{defn}
-Непрерывно-дифференцируемая векторная функция $\vv{b}(M)$, $M \in G$, называется векторным потенциалом векторного поля $\vv{a}(M)$, $M \in G \subset \bbR^3$, в области $G$, если 
-$$
-\forall M \in G\quad \vv{a}(M) = \rot \vv{b}(M)
-$$
-\end{defn}
-
-\begin{lemm}
-Если непрерывно-дифференцируемое векторное поле $\vv{a}(M)$, $M \in G$, имеет на области $G$ векторный потенциал, то оно соленоидально на $G$. 
-\end{lemm}
-
-\begin{proof}
-$\vv{a}(M)$ "--- непрерывно-дифференцируемо по условию.
-Тогда 
-\begin{equation*}
-\forall M \in G \quad \vv{a}(M) = \rot \: \vv{b}(M)
-\Rightarrow \quad \exists \div \vv{a}(M) = \div(\rot\vv{b}(M)) = 0 \text{ в } G. \tag*{\qedhere}
-\end{equation*}
-\end{proof}
-
-\begin{defn} 
-Замкнутой кусочно-гладкой поверхностью называется ограниченная кусочно-гладкая поверхность, не имеющая края. При этом, если $S = \sum\limits_{j = 1}^m S_j$, где $\forall j \in \overline{1,m}$, $S_j$ "--- простая гладкая поверхность с кусочно-гладким краем $\partial S_j$, то каждый гладкий участок края $\partial S_j$ совпадает с гладким участком края $\partial S_i$, но их ориентации противоположны. Суммарный край $\partial S = \sum\limits_{j = 1}^m \partial S_j$ "--- пуст. 
-\end{defn}\usepict{ch15pict3}{0.1}
-
-\begin{thm}
-Если непрерывно-дифференцируемое векторное поле $\vv{a}(M)$, $M \in G$, имеет в области $G$ векторный потенциал $\vv{b}$, то для любой замкнутой кусочно-гладкой поверхности $S: \; S\subset G$ выполняется равенство: $\iint\limits_S \vv{a}\,d\vv{s} = 0$.
-\end{thm}
-
-\begin{proof}
-Пусть $S_1$ "--- гладкий кусок кусочно-гладкой поверхности $S$ без края. Пусть $\gamma_1 = \partial S_1, \; \gamma_1$ "--- край $S_1$. Тогда поверхность $S_2 = S \setminus S_1$ имеет край $\gamma_2 = \partial S_2 = (\gamma_1)^{-1}$.
-
-$\vv{a}$ "--- непрерывно-дифференцируемая вектор-функция на области $G$.
-
-$S_2, S_1 \subset G$.
-
-$\Rightarrow$ на $S_2, S_1$ справедлива формула Стокса.
-\begin{multline*}
-\iint\limits_S \vv{a}\,d\vv{s} = \iint\limits_{S_1} \vv{a}\,d\vv{s} + \iint\limits_{S_2} \vv{a}\,d\vv{s} = \iint\limits_{S_1} \rot \: \vv{b}\,d\vv{s} + \iint\limits_{S_2} \rot \: \vv{b}\,d\vv{s} \xlongequal{\textit{Стокс}}\\
-= \iint\limits_{\gamma_1} \vv{b}\,d\vv{r} + \iint\limits_{\gamma_2} \vv{b}\,d\vv{r} = \iint\limits_{\gamma_1} \vv{b}\,d\vv{r} - \iint\limits_{\gamma_1} \vv{b}\,d\vv{r} = 0. \tag*{\qedhere}
-\end{multline*}
-\end{proof}
-
-\begin{thm}
-Если непрерывно-дифференцируемое векторное поле $\vv{a}(M)$, $M \in G$ соленоидально в области $G \subset \bbR^3$, то 
-\begin{multline}
-\forall M \in G \; \exists \delta > 0,\ \exists \textit{непр-дифф. вект. поле } \vv{b}(P), \; P \in O_\delta(M): \\ \quad \forall P \in O_\delta(M): \; \vv{a}(P) = \rot \: \vv{b}(P) 
-\end{multline}
-\end{thm}
-
-\begin{thm}[Гельмгольца\rindex{теорема!Гельмгольца}] 
-Любое непрерывно-дифференцируемое векторное поле $\vv{a}(M), \; M \in G$, $G$ "--- область в $\bbR^3$, является суммой двух непрерывно-дифференцируемых векторных полей "--- потенциального и соленоидального:
-$$
-\vv{a}(M) = \grad \: u(M) + \vv{c}(M), \quad \forall M \in G, \quad \div \: \vv{c}(M) = 0
-$$
-\end{thm}
+\begin{notion}
+Условие объёмной односвязности области $G$ во второй части теоремы существенно.
+\end{notion}

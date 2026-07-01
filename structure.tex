@@ -27,6 +27,8 @@
 
 \usepackage{xcolor} % Required for specifying colors by name
 \definecolor{prpl}{RGB}{150, 120, 182} % Define the purple color used for highlighting throughout the book
+\definecolor{grn}{RGB}{76, 153, 76}          % зелёный (для определений)
+\definecolor{chapclr}{RGB}{200, 60, 60}      % красный (для заголовков глав/билетов)
 
 %----------------------------------------------------------------------------------------
 %	FONTS
@@ -306,7 +308,7 @@ rightline=false,
 leftline=true,
 topline=false,
 bottomline=false,
-linecolor=prpl,
+linecolor=grn,
 innerleftmargin=5pt,
 innerrightmargin=5pt,
 innertopmargin=0pt,
@@ -556,7 +558,7 @@ innerbottommargin=5pt]{cBox}
 		\begin{tikzpicture}[remember picture]
 		\node (n) at (\Gm@lmargin,-\Gm@tmargin) [ inner sep=3mm, text width={\textwidth-0mm}, text opacity=1, font=\huge\sffamily\bfseries, text=black]{#1};
 		\begin{scope}[on background layer]
-		\draw [line width=2pt, rounded corners=14pt, prpl, fill=prpl!20] (n.north -| current page.east) -| (n.south west) -- (n.south -| current page.east);
+		\draw [line width=2pt, rounded corners=14pt, chapclr, fill=prpl!20] (n.north -| current page.east) -| (n.south west) -- (n.south -| current page.east);
 		\end{scope}
 		\end{tikzpicture}%
 		\fi\bigskip\par
@@ -569,7 +571,7 @@ innerbottommargin=5pt]{cBox}
 	\begin{tikzpicture}[remember picture]
 	\node (n) at (\Gm@lmargin,-\Gm@tmargin) [ inner sep=3mm, text width={\textwidth-0mm}, text opacity=1, font=\huge\sffamily\bfseries, text=black]{#1};
 	\begin{scope}[on background layer]
-	\draw [line width=2pt, rounded corners=14pt, prpl, fill=prpl!20] (n.north -| current page.east) -| (n.south west) -- (n.south -| current page.east);
+	\draw [line width=2pt, rounded corners=14pt, chapclr, fill=prpl!20] (n.north -| current page.east) -| (n.south west) -- (n.south -| current page.east);
 	\end{scope}
 	\end{tikzpicture}%
 	\bigskip\par
