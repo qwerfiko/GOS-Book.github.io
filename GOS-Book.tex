@@ -3,14 +3,14 @@
 \input{include/header}
 \input{include/macros}
 \begin{document}
-%\frontmatter
+\frontmatter
 \include{frontmatter/titlepageTMB}
 \tableofcontents
-\include{frontmatter/foreword}
-\include{frontmatter/aboutGOS}
+%\include{frontmatter/foreword}
+%\include{frontmatter/aboutGOS}
 %\mainmatter
-\foreach \n in {17,...,20}{\include{chapters/chapter\n}}
+\foreach \n in {1,...,19}{\include{chapters/chapter\n}}
 \printindex
 %\backmatter
-\include{backmatter/theend}
+%\include{backmatter/theend}
 \end{document}
