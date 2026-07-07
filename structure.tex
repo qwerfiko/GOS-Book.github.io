@@ -8,13 +8,16 @@
 %	VARIOUS REQUIRED PACKAGES AND CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 
-\usepackage[margin=1.6cm, top=1.2cm,right=1.9cm,left=1.9cm, footskip = 1 cm, headheight=20pt,headsep=0.2cm]{geometry}
+\usepackage[margin=1.6cm, top=1.2cm,right=1.9cm,left=1.9cm,
+            footskip=1cm, headheight=31pt, headsep=0.2cm]{geometry}
 %\geometry{showframe}
 
 \usepackage{graphicx} % Required for including pictures
-\graphicspath{{./pictures/}} % Specifies the directory where pictures are stored
+\graphicspath{{pictures/}} % Specifies the directory where pictures are stored
 
 \usepackage{lipsum} % Inserts dummy text
+
+\usepackage{etoolbox}
 
 \usepackage{tikz} % Required for drawing custom shapes
 \usetikzlibrary{calc,backgrounds}
@@ -156,20 +159,25 @@
 
 % \if for appendix
 \makeatletter
-\newcommand{\inappendix}{TT\fi\expandafter\ifx\@chapapp\appendixname}
+\newif\ifinappendix
+\pretocmd{\appendix}{\global\inappendixtrue}{}{}
 \makeatother
+
 % page headers
 \makeatletter
-\renewcommand{\chaptermark}[1]{
-	\if\inappendix
-	\markboth{#1}{}
-	\else
-		\if@mainmatter
-		\markboth{\ifnum\value{secnumdepth}>-1 \chaptertitlename\thechapter \else #1 \fi}{}
-		\else
-		\markboth{#1}{}
-		\fi
-	\fi
+\renewcommand{\chaptermark}[1]{%
+  \ifinappendix
+    \markboth{\appendixname~\thechapter.\ #1}{}%
+  \else
+    \if@mainmatter
+      \markboth{\chaptername~\thechapter.\ #1}{}%
+    \else
+      \markboth{#1}{}%
+    \fi
+  \fi
+}
+\renewcommand{\sectionmark}[1]{%
+  \markright{\thesection.\ #1}%
 }
 \makeatother
 
@@ -180,9 +188,13 @@
 \fancyhead[LO]{\nouppercase{\footnotesize\sffamily \rightmark}} % Print the nearest section name on the left side of odd pages
 \fancyhead[RE]{\nouppercase{\footnotesize\sffamily \leftmark}} % Print the current chapter name on the right side of even pages
 \renewcommand{\headrulewidth}{0.5pt} % Width of the rule under the header
-\addtolength{\headheight}{2.5pt} % Increase the spacing around the header slightly
 \renewcommand{\footrulewidth}{0pt} % Removes the rule in the footer
-\fancypagestyle{plain}{\fancyhead{}\renewcommand{\headrulewidth}{0pt}} % Style for when a plain pagestyle is specified
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyhead[LE,RO]{\sffamily\normalsize\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+}
 
 % Removes the header from odd empty pages at the end of chapters
 \makeatletter
@@ -205,7 +217,7 @@
 \newcommand{\intoo}[2]{\mathopen{]}#1\,;#2\mathclose{[}}
 \newcommand{\ud}{\mathop{\mathrm{{}d}}\mathopen{}}
 \newcommand{\intff}[2]{\mathopen{[}#1\,;#2\mathclose{]}}
-\newtheorem{notation}{Notation}[chapter]
+\newtheorem{notation}{Обозначение}[chapter]
 
 % Boxed/framed environments
 \newtheoremstyle{prplnumbox}% % Theorem style name
@@ -281,7 +293,9 @@ innerrightmargin=5pt,
 innertopmargin=5pt,
 leftmargin=0cm,
 rightmargin=0cm,
-innerbottommargin=5pt, 
+innerbottommargin=5pt,
+splittopskip=7pt,
+splitbottomskip=7pt, 
 linewidth=1pt]{tBox}
 
 % Exercise box	  
@@ -299,6 +313,8 @@ innertopmargin=5pt,
 innerbottommargin=5pt,
 leftmargin=0cm,
 rightmargin=0cm,
+splittopskip=7pt,
+splitbottomskip=7pt,
 linewidth=4pt]{eBox}	
 
 % Definition box
@@ -315,6 +331,8 @@ innertopmargin=0pt,
 leftmargin=0cm,
 rightmargin=0cm,
 linewidth=4pt,
+splittopskip=7pt,
+splitbottomskip=7pt,
 innerbottommargin=0pt]{dBox}	
 
 % Corollary box
@@ -332,6 +350,8 @@ innertopmargin=5pt,
 leftmargin=0cm,
 rightmargin=0cm,
 linewidth=4pt,
+splittopskip=7pt,
+splitbottomskip=7pt,
 innerbottommargin=5pt]{cBox}
 
 % Creates an environment for each type of theorem and assigns it a theorem text style from the "Theorem Styles" section above and a colored box from above
@@ -343,90 +363,77 @@ innerbottommargin=5pt]{cBox}
 \renewcommand{\thedefnT}{\arabic{defnT}}
 \renewcommand{\theHdefnT}{\thechapter.\arabic{defnT}}
 \newenvironment{defn}{\begin{dBox}\begin{defnT}}{\end{defnT}\end{dBox}}	
-\newcounter{defn}
 
 \newtheorem{defnnT}{Определение} %штрихованное.
 \renewcommand{\thedefnnT}{\arabic{defnT}'}
 \renewcommand{\theHdefnnT}{\thechapter.\arabic{defnnT}'}
 \newenvironment{defnn}{\begin{dBox}\begin{defnnT}}{\end{defnnT}\end{dBox}}	
-\newcounter{defnn}
 
 \theoremstyle{prplnumbox}
 \newtheorem{thmT}{Теорема}[chapter]
 \renewcommand{\thethmT}{\arabic{thmT}}
 \renewcommand{\theHthmT}{\thechapter.\arabic{thmT}}
 \newenvironment{thm}{\begin{eBox}\begin{thmT}}{\end{thmT}\end{eBox}}
-\newcounter{thm}
 
 \newtheorem{thmnT}{Теорема}[chapter] %штрихованное.
 \renewcommand{\thethmnT}{\arabic{thmT}'}
-\renewcommand{\theHthmnT}{\thechapter.arabic{thmnT}'}
+\renewcommand{\theHthmnT}{\thechapter.\arabic{thmnT}'}
 \newenvironment{thmn}{\begin{eBox}\begin{thmnT}}{\end{thmnT}\end{eBox}}
-\newcounter{thmn}
 
 \newtheorem{lemmT}{Лемма}[chapter]
 \renewcommand{\thelemmT}{\arabic{lemmT}}
 \renewcommand{\theHlemmT}{\thechapter.\arabic{lemmT}}
 \newenvironment{lemm}{\begin{eBox}\begin{lemmT}}{\end{lemmT}\end{eBox}}
-\newcounter{lemm}
 
 \newtheorem{lemmnT}{Лемма}[chapter] %штрихованное.
 \renewcommand{\thelemmnT}{\arabic{lemmT}'}
 \renewcommand{\theHlemmnT}{\thechapter.\arabic{lemmnT}'}
 \newenvironment{lemmn}{\begin{eBox}\begin{lemmnT}}{\end{lemmnT}\end{eBox}}
-\newcounter{lemmn}
 
 \newtheorem{sttT}{Утверждение}[chapter]
 \renewcommand{\thesttT}{\arabic{sttT}}
-\providecommand{\theHstt}{\thechapter.\arabic{sttT}}
+\renewcommand{\theHsttT}{\thechapter.\arabic{sttT}}
 \newenvironment{stt}{\begin{eBox}\begin{sttT}}{\end{sttT}\end{eBox}}
-\newcounter{stt}
 
 \newtheorem{axiomeT}{Аксиома}[chapter]
 \renewcommand{\theaxiomeT}{\arabic{axiomeT}}
 \renewcommand{\theHaxiomeT}{\thechapter.\arabic{axiomeT}}
 \newenvironment{axiome}{\begin{eBox}\begin{axiomeT}}{\end{axiomeT}\end{eBox}}
-\newcounter{axiome}
 
 \newtheorem{axiomenT}{Аксиома}[chapter] %штрихованное.
 \renewcommand{\theaxiomenT}{\arabic{axiomeT}'}
 \renewcommand{\theHaxiomenT}{\thechapter.\arabic{axiomenT}'}
 \newenvironment{axiomen}{\begin{eBox}\begin{axiomenT}}{\end{axiomenT}\end{eBox}}
-\newcounter{axiomen}
 
 \theoremstyle{blacknumbox}
 \newtheorem{consT}{Следствие}[chapter]
 \renewcommand{\theconsT}{\arabic{consT}}
 \renewcommand{\theHconsT}{\thechapter.\arabic{consT}}
 \newenvironment{cons}{\begin{cBox}\begin{consT}}{\end{consT}\end{cBox}}	
-\newcounter{cons}
 
-\newtheorem{consnT}{Cледствие}[chapter] %штрихованное.
+\newtheorem{consnT}{Следствие}[chapter] %штрихованное.
 \renewcommand{\theconsnT}{\arabic{consT}'}
 \renewcommand{\theHconsnT}{\thechapter.\arabic{consnT}'}
 \newenvironment{consn}{\begin{cBox}\begin{consnT}}{\end{consnT}\end{cBox}}	
-\newcounter{consn}
 
 \theoremstyle{blacknumex}  
 \newtheorem{exmplT}{Пример}[chapter]
 \renewcommand{\theexmplT}{\arabic{exmplT}}
 \renewcommand{\theHexmplT}{\thechapter.\arabic{exmplT}}
-\newenvironment{exmpl}{\pushQED{\qed}\begin{exmplT}}{\popQED\end{exmplT}}
-\newcounter{exmpl}
+\newenvironment{exmpl}{\begin{exmplT}}{\end{exmplT}}
 
 \theoremstyle{prplnumbox}
 \newtheorem{exercT}{Упражнение}[chapter]
 \renewcommand{\theexercT}{\arabic{exercT}}
 \renewcommand{\theHexercT}{\thechapter.\arabic{exercT}}
-\newenvironment{exerc}{\begin{eBox}\begin{exercT}}{\hfill{\color{prpl}}\end{exercT}\end{eBox}}	
-\newcounter{exerc}
+\newenvironment{exerc}{\begin{eBox}\begin{exercT}}{\end{exercT}\end{eBox}}
 
 
 \newtheorem*{notionT}{Замечание}
 \newenvironment{notion}{\begin{tBox}\begin{notionT}}{\end{notionT}\end{tBox}}	
 
 \numberwithin{equation}{chapter}
-\renewcommand{\theequation}{\arabic{equation}}
+\renewcommand{\theequation}{\thechapter.\arabic{equation}}
 \renewcommand{\theHequation}{\thechapter.\arabic{equation}}
 
 \newenvironment{solution}
@@ -546,34 +553,58 @@ innerbottommargin=5pt]{cBox}
 %----------------------------------------------------------------------------------------
 
 \def\@makechapterhead#1{%
-	{\noindent
-		\if@mainmatter
-		\begin{tikzpicture}[remember picture]
-		\node (n) at (\Gm@lmargin,-\Gm@tmargin) [ inner sep=3mm, text width={\textwidth}, text opacity=1, font=\huge\sffamily\bfseries, text=black]{\thechapter. #1};
-		\begin{scope}[on background layer]
-		\draw [line width=2pt, rounded corners=14pt, prpl, fill=prpl!20] (n.north -| current page.east) -| (n.south west) -- (n.south -| current page.east);
-		\end{scope}
-		\end{tikzpicture}%
-		\else
-		\begin{tikzpicture}[remember picture]
-		\node (n) at (\Gm@lmargin,-\Gm@tmargin) [ inner sep=3mm, text width={\textwidth-0mm}, text opacity=1, font=\huge\sffamily\bfseries, text=black]{#1};
-		\begin{scope}[on background layer]
-		\draw [line width=2pt, rounded corners=14pt, chapclr, fill=prpl!20] (n.north -| current page.east) -| (n.south west) -- (n.south -| current page.east);
-		\end{scope}
-		\end{tikzpicture}%
-		\fi\bigskip\par
-}}
+  \begingroup
+  \hfuzz=100pt\relax
+  {\noindent
+    \if@mainmatter
+      \begin{tikzpicture}[remember picture]
+        \node (n) at (\Gm@lmargin,-\Gm@tmargin)
+          [inner sep=3mm, text width={\textwidth}, text opacity=1,
+           font=\huge\sffamily\bfseries, text=black]
+          {\thechapter. #1};
+        \begin{scope}[on background layer]
+          \draw [line width=2pt, rounded corners=14pt, prpl, fill=prpl!20]
+            (n.north -| current page.east) -| (n.south west)
+            -- (n.south -| current page.east);
+        \end{scope}
+      \end{tikzpicture}%
+    \else
+      \begin{tikzpicture}[remember picture]
+        \node (n) at (\Gm@lmargin,-\Gm@tmargin)
+          [inner sep=3mm, text width={\textwidth-0mm}, text opacity=1,
+           font=\huge\sffamily\bfseries, text=black]
+          {#1};
+        \begin{scope}[on background layer]
+          \draw [line width=2pt, rounded corners=14pt, chapclr, fill=prpl!20]
+            (n.north -| current page.east) -| (n.south west)
+            -- (n.south -| current page.east);
+        \end{scope}
+      \end{tikzpicture}%
+    \fi
+    \bigskip\par
+  }%
+  \endgroup
+}
 
 %-------------------------------------------
 
 \def\@makeschapterhead#1{%
-	\noindent
-	\begin{tikzpicture}[remember picture]
-	\node (n) at (\Gm@lmargin,-\Gm@tmargin) [ inner sep=3mm, text width={\textwidth-0mm}, text opacity=1, font=\huge\sffamily\bfseries, text=black]{#1};
-	\begin{scope}[on background layer]
-	\draw [line width=2pt, rounded corners=14pt, chapclr, fill=prpl!20] (n.north -| current page.east) -| (n.south west) -- (n.south -| current page.east);
-	\end{scope}
-	\end{tikzpicture}%
-	\bigskip\par
+  \begingroup
+  \hfuzz=100pt\relax
+  \noindent
+  \begin{tikzpicture}[remember picture]
+    \node (n) at (\Gm@lmargin,-\Gm@tmargin)
+      [inner sep=3mm, text width={\textwidth-0mm}, text opacity=1,
+       font=\huge\sffamily\bfseries, text=black]
+      {#1};
+    \begin{scope}[on background layer]
+      \draw [line width=2pt, rounded corners=14pt, chapclr, fill=prpl!20]
+        (n.north -| current page.east) -| (n.south west)
+        -- (n.south -| current page.east);
+    \end{scope}
+  \end{tikzpicture}%
+  \bigskip\par
+  \endgroup
 }
+
 \makeatother

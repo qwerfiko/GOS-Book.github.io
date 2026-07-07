@@ -19,9 +19,7 @@
 %%%%%%%%%%%%%%%%%%           PACKAGES            %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage{graphicx}
 \usepackage[font=footnotesize]{caption}
-\usepackage{microtype}
 \input{insbox.tex}
 \usepackage{threeparttable}
 \usepackage{changepage}
@@ -44,9 +42,9 @@
 \newcommand{\usepict}[3][0]{%
   \vspace*{-\baselineskip}%
   \begin{center}%
-    \captionsetup{type=figure}%
-    \includegraphics[height=#3\textheight]{pictures/#2}%
-    \captionof{figure}{}\label{#2}%
+    \captionsetup{type=figure,list=false}%
+    \includegraphics[width=\linewidth,height=#3\textheight,keepaspectratio]{#2}%
+    \captionof{figure}{}\label{fig:#2}%
   \end{center}%
   \vspace*{-#1\baselineskip}%
 }
@@ -59,13 +57,13 @@
   \ifoddpage%
     \InsertBoxR{0}{\begin{threeparttable}\begin{tabular}{c@{}}%
       \captionsetup{type=figure}%
-      \includegraphics[width=#3\textwidth]{pictures/#2}%
-    \end{tabular}\captionof{figure}{}\label{#2}\end{threeparttable}}[#1]%
+      \includegraphics[width=#3\textwidth]{#2}%
+    \end{tabular}\captionof{figure}{}\label{fig:#2}\end{threeparttable}}[#1]%
   \else%
     \InsertBoxL{0}{\begin{threeparttable}\begin{tabular}{c@{}}%
       \captionsetup{type=figure}%
-      \includegraphics[width=#3\textwidth]{pictures/#2}%
-    \end{tabular}\captionof{figure}{}\label{#2}\end{threeparttable}}[#1]%
+      \includegraphics[width=#3\textwidth]{#2}%
+    \end{tabular}\captionof{figure}{}\label{fig:#2}\end{threeparttable}}[#1]%
   \fi%
 }
 
@@ -149,8 +147,12 @@
 \patchcmd\enitkv@enumitem@wide
   {\enit@align@left}%
   {\widetrue\enit@align@left}%
-  {}{\FailedToPatch}
+  {}{}
 \makeatother
+
+\AtBeginEnvironment{enumerate}{\global\widefalse}
+\AtBeginEnvironment{itemize}{\global\widefalse}
+\AtBeginEnvironment{description}{\global\widefalse}
 
 % --- \itempicture ---
 
@@ -167,7 +169,7 @@
     \InsertListR[#1]{0}{\begin{threeparttable}\begin{tabular}{c@{}}%
       \captionsetup{type=figure}%
       \includegraphics[width=#3\textwidth]{#2}%
-    \end{tabular}\captionof{figure}{}\label{#2}\end{threeparttable}}%
+    \end{tabular}\captionof{figure}{}\label{fig:#2}\end{threeparttable}}%
     \ifwide
       \setlength{\itemskiplenght}{\widthof{\hbox{\number\value{enumi}.\,}}}%
       \hskip\itemskiplenght
@@ -176,7 +178,7 @@
     \setlength{\picturewidth}{\widthof{\hbox{\begin{threeparttable}\begin{tabular}{c@{}}%
       \captionsetup{type=figure}%
       \includegraphics[width=#3\textwidth]{#2}%
-    \end{tabular}\captionof{figure}{}\label{#2}\end{threeparttable}}}}%
+    \end{tabular}\captionof{figure}{}\label{fig:#2}\end{threeparttable}}}}%
     \ifwide
       \item[]%
     \else
@@ -187,7 +189,7 @@
     \InsertListL[#1]{0}{\begin{threeparttable}\begin{tabular}{c@{}}%
       \captionsetup{type=figure}%
       \includegraphics[width=#3\textwidth]{#2}%
-    \end{tabular}\captionof{figure}{}\label{#2}\end{threeparttable}}%
+    \end{tabular}\captionof{figure}{}\label{fig:#2}\end{threeparttable}}%
     \ifwide
       \addtocounter{enumi}{1}\hskip-0.5px\number\value{enumi}.~\hskip1px
     \fi
