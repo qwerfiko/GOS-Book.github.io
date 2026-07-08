@@ -1,16 +1,26 @@
 \documentclass[a5paper,openany,9pt]{extbook}
+
+%----- Преамбула -----
 \input{structure}
 \input{include/header}
 \input{include/macros}
+
 \begin{document}
-\frontmatter
-\include{frontmatter/titlepageTMB}
+
+%----- Титул и предисловие -----
+%\frontmatter
+%\include{frontmatter/titlepageTMB}
 \tableofcontents
 %\include{frontmatter/foreword}
 %\include{frontmatter/aboutGOS}
+
+%----- Основной текст -----
 \mainmatter
-\foreach \n in {1,...,13}{\include{chapters/chapter\n}}
-\printindex
-\backmatter
+\foreach \n in {1,...,19}{\include{chapters/chapter\n}}
+
+%----- Приложения и указатель -----
+%\backmatter
+%\printindex
 %\include{backmatter/theend}
+
 \end{document}

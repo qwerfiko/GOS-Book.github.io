@@ -1,18 +1,19 @@
- ;;; xindy style file
- (markup-locclass-list :open "\dotfill" :sep "")
+(require "tex/inputenc/utf8.xdy")
+(require "lang/russian/utf8-lang.xdy")
 
- (define-letter-groups
- ("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m"
- "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"))
+(define-attributes (("default")))
 
- (require
- "rules/latin-tolower.xdy")
+(markup-index :open  "\begin{theindex}~n"
+              :close "~n\end{theindex}~n"
+              :tree)
 
- (use-rule-set
- :run 0
- :rule-set ("latin-tolower"))
+(markup-letter-group :open-head "{\bfseries\Large "
+                     :close-head "}\medskip"
+                     :sep "~n")
 
- (markup-letter-group
- :open-head "\nopagebreak\tikz\node at (0pt,0pt) [draw=none,fill=prpl!40,line width=1pt,inner sep=5pt]{\parbox{\linewidth-2\fboxsep-2\fboxrule-9.2pt}{\centering\large\sffamily\bfseries\textcolor{black}{ "
-    :close-head "}}};\vspace*{0.2cm}\nopagebreak"
- :capitalize)
+(markup-indexentry :open "~n  \item " :depth 0)
+(markup-indexentry :open "~n    \subitem " :depth 1)
+(markup-indexentry :open "~n      \subsubitem " :depth 2)
+
+(markup-locclass-list :open "\, ")
+(markup-locref-list   :sep ", ")
